@@ -100,10 +100,11 @@ const evidenceEvent = {
       </div>
 
       <p class="note">
-        This sample is generated from a real Meyppi engine run on an
-        illustrative synthetic campaign. Client, campaign, and publisher
-        identifiers are redacted. A paid audit delivers the identical report
-        format with your campaign data.
+        This sample was produced by the real Meyppi pipeline on an
+        illustrative synthetic campaign, so every number below is a genuine
+        engine output, including the partial detection and the version
+        mismatch. Client, campaign and publisher identifiers are redacted.
+        A paid audit delivers this exact format with your campaign's data.
       </p>
 
       <!-- Summary -->
@@ -167,24 +168,26 @@ const evidenceEvent = {
 
       <div class="demo-callout">
         <div>
-          <h3>Explore this report interactively</h3>
+          <h3>Rather poke at it yourself?</h3>
           <p>
-            Filter by classification, open any placement, and inspect the
-            verification event and timeline evidence behind it — in the
-            interactive version of this report.
+            The interactive version of this report lets you filter by
+            classification and open any placement to inspect its evidence:
+            the verification event and where the ad landed in the episode.
           </p>
         </div>
         <a class="btn btn--primary" href="/demo">
-          Open the demo <span class="arrow">→</span>
+          Open the interactive demo
         </a>
       </div>
 
       <!-- Evidence example -->
-      <h2 style="margin-top:48px">Evidence — one verification event</h2>
+      <h2 style="margin-top:48px">Evidence: one verification event</h2>
       <p>
-        Every placement in the audit is backed by a verification event like
-        this one. Raw evidence is exported alongside the report and never
-        discarded.
+        This is what sits behind a single row of the table: the full
+        verification event for EP-1041, as exported with the report. The
+        offset, the coverage ratio, the match count, the file hash. In a
+        paid audit you receive one of these for every placement, and the
+        raw evidence is never discarded after classification.
       </p>
       <pre class="evidence"><code>{JSON.stringify(evidenceEvent, null, 2)}</code></pre>
 
@@ -194,9 +197,10 @@ const evidenceEvent = {
         Master creatives are fingerprinted (Wang-style constellation
         fingerprinting) and matched against the published media with
         temporal alignment. Reference coverage, continuity, gap analysis,
-        and alignment consistency determine each classification. Every
-        ambiguous case is classified as Insufficient Signal or Manual
-        Review Required — never silently resolved.
+        and alignment consistency determine each classification. When the
+        evidence does not support a call, the placement is marked
+        Insufficient Signal or Manual Review Required, and the reason is
+        stated in the report.
       </p>
 
       <h3>Classification definitions</h3>

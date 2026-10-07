@@ -16,8 +16,9 @@ const configured = Boolean(SITE.formEndpoint);
           <span class="kicker">Request an audit</span>
           <h1>Request a Campaign Audit</h1>
           <p class="section__lede">
-            Tell us what you want verified. We will reply within one
-            working day with scope, price, and what we need from you.
+            One line about the campaign is enough to start. We reply within
+            one working day with scope, a fixed price, and exactly what we
+            will need from you. No discovery call required.
           </p>
 
           {
@@ -77,10 +78,11 @@ const configured = Boolean(SITE.formEndpoint);
               </form>
             ) : (
               <div class="card" style="margin-top:24px">
-                <h3>Form temporarily unavailable</h3>
+                <h3>Prefer email? Reach us directly.</h3>
                 <p>
-                  The request form is not yet connected. Email us directly
-                  and we will respond within one working day:
+                  Send the same details (campaign, creatives, publishers,
+                  dates) to the address below and you will get the same
+                  one-working-day reply with scope and a fixed price.
                 </p>
                 <p>
                   <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>

@@ -10,7 +10,7 @@ interface Props {
   noindex?: boolean;
 }
 const { title, description = SITE.description, noindex = false } = Astro.props;
-const fullTitle = `${title} — Meyppi`;
+const fullTitle = `${title} | Meyppi`;
 const canonical = new URL(Astro.url.pathname, SITE.url);
 
 const orgSchema = {
@@ -20,7 +20,7 @@ const orgSchema = {
   url: SITE.url,
   logo: new URL('/brand/logo-full.png', SITE.url).href,
   description:
-    'Independent media delivery verification. Meyppi verifies whether contracted audio creatives appeared in published media — which version, when, and whether delivery was complete.',
+    'Independent media delivery verification. Meyppi verifies whether contracted audio creatives appeared in published media: which version, when, and whether delivery was complete.',
   areaServed: 'IN',
   knowsAbout: [
     'media delivery verification',
@@ -70,7 +70,7 @@ const orgSchema = {
     <Footer />
 
     <script>
-      // progressive-enhancement scroll reveal (no-op with reduced motion —
+      // progressive-enhancement scroll reveal (no-op with reduced motion:
       // CSS forces .reveal visible)
       const els = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window && els.length) {

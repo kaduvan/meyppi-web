@@ -5,52 +5,98 @@ import Button from '../components/Button.astro';
 
 <Base
   title="For Agencies"
-  description="Independent verification for client reporting, publisher reconciliation, and makegood documentation."
+  description="Independent verification for client reporting, publisher reconciliation, and makegood documentation. How agencies use Meyppi campaign audits."
 >
   <section class="page-head">
     <div class="container narrow">
       <span class="kicker">For agencies</span>
       <h1>Independent verification for client reporting.</h1>
       <p class="page-head__sub">
-        When your name is on the report, the evidence behind it matters.
-        Meyppi gives agencies verification that stands on its own —
-        independent of publisher reporting and of your own traffic sheets.
+        When the campaign underdelivers, the agency holds the client
+        relationship. Meyppi makes sure you are the best-informed party in
+        that conversation instead of the messenger.
       </p>
     </div>
   </section>
 
   <section class="section">
-    <div class="container narrow">
-      <div class="grid grid--3" style="margin-top:0">
-        <div class="card reveal">
-          <h3>Client defensibility</h3>
-          <p>
-            Present clients with placement-level verification, not
-            self-reported numbers. Every result carries its evidence chain:
-            creative version, timestamps, matched duration, confidence.
-          </p>
-        </div>
-        <div class="card reveal">
-          <h3>Publisher reconciliation</h3>
-          <p>
-            When a placement is trimmed, missing, or substituted with the
-            wrong version, you get the discrepancy with evidence attached —
-            in a format you can take directly to the publisher.
-          </p>
-        </div>
-        <div class="card reveal">
-          <h3>Makegood documentation</h3>
-          <p>
-            Discrepancies documented independently are discrepancies that
-            get resolved. Meyppi reports give you the record to support
-            makegood requests and corrections.
-          </p>
-        </div>
-      </div>
+    <div class="container narrow prose">
 
-      <div style="margin-top:48px">
+      <h2>The client review</h2>
+      <p>
+        It is quarter-end and the podcast campaign is up in the review
+        deck. Twelve placements on paper, screenshots from the publisher,
+        and a client who has started asking harder questions this year,
+        because everyone's clients have. The strongest thing you can put
+        on that slide is a number you did not produce yourself: placement
+        by placement, verified from the published media, with the evidence
+        attached.
+      </p>
+      <p>
+        Agencies use Meyppi audits the way audited financials get used.
+        Not because they expect fraud, but because a number with an
+        independent trail behind it ends arguments that a number without
+        one starts.
+      </p>
+
+      <h2>The reconciliation call</h2>
+      <p>
+        You suspect an episode dropped its ad. The publisher's report says
+        it ran. Now what.
+      </p>
+      <p>
+        This is the conversation the audit was built for. The report does
+        not say "we believe the placement is missing". It says: episode
+        EP-1044, published 14 October, fingerprinted end to end, zero
+        occurrences of creative CR-A v1 at any offset, match count zero,
+        alongside four other placements on the same publisher that matched
+        cleanly. One number to argue with, and it is not yours.
+      </p>
+      <p>
+        In practice, the tone of these conversations changes once the
+        evidence is on the table. Publishers fix what can be proven
+        quickly, because proven discrepancies are cheaper to make good
+        than to dispute.
+      </p>
+
+      <h2>The makegood</h2>
+      <p>
+        A makegood request with documentation gets processed. A makegood
+        request with a feeling behind it gets a polite reply and a long
+        queue. Every discrepancy in a Meyppi report carries the detail
+        that makes it actionable: which placement, which episode, what was
+        expected, what aired, and the event evidence behind the
+        classification. Your team can attach the relevant page and move
+        the discussion from whether it happened to what happens next.
+      </p>
+
+      <h2>What you get, concretely</h2>
+      <ul>
+        <li>
+          A placement-by-placement audit of one completed campaign, PDF
+          for the client, CSV and JSON for your analysts.
+        </li>
+        <li>
+          Classification per placement: full, partial, version mismatch,
+          not detected, insufficient signal, or manual review, with the
+          reason visible on the page.
+        </li>
+        <li>
+          Evidence exports that survive being forwarded: every finding
+          backed by hashes, offsets and match counts.
+        </li>
+        <li>
+          A fixed fee known before the work starts, so the audit itself
+          never becomes a line item argument.
+        </li>
+      </ul>
+
+      <div style="margin-top:44px; display:flex; gap:16px; flex-wrap:wrap">
         <Button variant="primary" href="/contact">
-          Request a Campaign Audit <span class="arrow">→</span>
+          Request a Campaign Audit
+        </Button>
+        <Button variant="secondary" href="/sample-report">
+          See a Sample Report
         </Button>
       </div>
     </div>
@@ -59,7 +105,7 @@ import Button from '../components/Button.astro';
 
 <style>
   .narrow {
-    max-width: 900px;
+    max-width: 760px;
   }
   .page-head {
     background: var(--indigo-deep);

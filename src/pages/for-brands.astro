@@ -5,51 +5,87 @@ import Button from '../components/Button.astro';
 
 <Base
   title="For Brands"
-  description="Direct visibility into whether contracted media actually ran — independent of agency or publisher reporting."
+  description="Direct visibility into whether contracted media actually ran, independent of agency or publisher reporting. How brands use Meyppi campaign audits."
 >
   <section class="page-head">
     <div class="container narrow">
       <span class="kicker">For brands</span>
       <h1>Know what actually ran.</h1>
       <p class="page-head__sub">
-        You approve the plan and you see the invoice. What runs in between
-        is reported to you by the same people who sold it. Meyppi closes
-        that gap with independent verification.
+        You approve the plan, you pay the invoice, and everything you know
+        about what ran in between arrived through the same channel that
+        sold it to you. Meyppi closes that loop.
       </p>
     </div>
   </section>
 
   <section class="section">
-    <div class="container narrow">
-      <div class="grid grid--3" style="margin-top:0">
-        <div class="card reveal">
-          <h3>Budget accountability</h3>
-          <p>
-            Verify that the placements you paid for actually aired —
-            complete, in the right version, on the contracted episodes.
-          </p>
-        </div>
-        <div class="card reveal">
-          <h3>Independent of everyone</h3>
-          <p>
-            Meyppi is neither your agency nor your publisher. Verification
-            starts from the published media itself, not from anyone's
-            report.
-          </p>
-        </div>
-        <div class="card reveal">
-          <h3>Evidence, not assurances</h3>
-          <p>
-            Every placement comes back classified — Detected, Not Detected,
-            Insufficient Signal, or Manual Review Required — with the
-            evidence behind the result.
-          </p>
-        </div>
-      </div>
+    <div class="container narrow prose">
 
-      <div style="margin-top:48px">
+      <h2>The question that does not go away</h2>
+      <p>
+        A podcast budget leaves your account every month. The report that
+        comes back is a PDF from the publisher, summarised by the agency.
+        Everyone in that chain is professional and almost everything is
+        probably fine. But "probably fine" is doing a lot of work in that
+        sentence, and it is your money making it do that work.
+      </p>
+      <p>
+        The published episodes are public. Your creatives are your
+        property. Whether the two were combined, correctly and completely,
+        on the episodes you bought is not a matter of trust. It is
+        checkable.
+      </p>
+
+      <h2>What a brand-side audit looks like</h2>
+      <p>
+        You commission the audit directly, so the result belongs to you:
+        usable with your agency, with the publisher, or in your own
+        reporting, with no intermediary deciding what you need to see.
+        We work from the published media and your contracted creative
+        files, and the report reads the same whether it finds everything
+        delivered or a fifth of the campaign missing. We have no
+        relationship to protect and nothing to sell you afterward except
+        the next audit.
+      </p>
+      <p>
+        The audit is fixed fee and scoped before it starts, so it does not
+        turn into an open-ended consulting engagement. One campaign, one
+        price, one report.
+      </p>
+
+      <h2>What the report answers</h2>
+      <ul>
+        <li>
+          Did each contracted placement actually air, and if not, which
+          ones did not?
+        </li>
+        <li>
+          Which version of the creative ran, when more than one was in
+          circulation?
+        </li>
+        <li>
+          Did every placement run for the full contracted duration, or
+          were some trimmed?
+        </li>
+        <li>
+          Which findings are solid, and which are ambiguous enough that a
+          person reviewed them?
+        </li>
+      </ul>
+      <p>
+        Every answer comes with the evidence behind it, in a format you
+        can keep on file. If the campaign is clean, you have bought
+        certainty for the cost of a rounding error on the media spend. If
+        it is not, you have the documentation to recover it.
+      </p>
+
+      <div style="margin-top:44px; display:flex; gap:16px; flex-wrap:wrap">
         <Button variant="primary" href="/contact">
-          Request a Campaign Audit <span class="arrow">→</span>
+          Request a Campaign Audit
+        </Button>
+        <Button variant="secondary" href="/pricing">
+          See Pricing
         </Button>
       </div>
     </div>
@@ -58,7 +94,7 @@ import Button from '../components/Button.astro';
 
 <style>
   .narrow {
-    max-width: 900px;
+    max-width: 760px;
   }
   .page-head {
     background: var(--indigo-deep);

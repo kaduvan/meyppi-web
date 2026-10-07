@@ -6,39 +6,39 @@ const steps = [
   {
     n: '01',
     title: 'Expected delivery',
-    body: 'You provide the campaign contract: creatives, publishers, episodes, dates.',
+    body: 'You give us the contract side: every creative version, the publishers, the episodes, the flight dates.',
   },
   {
     n: '02',
     title: 'Independently observed',
-    body: 'We ingest the published media from permitted sources and fingerprint every episode.',
+    body: 'We pull the published media from RSS feeds and other permitted sources, then fingerprint each episode end to end.',
   },
   {
     n: '03',
     title: 'Discrepancy detected',
-    body: 'Wrong version, trimmed duration, missing placement — flagged against the contract.',
+    body: 'A 24-second cut where 30 seconds were bought. Version 2 where version 1 was contracted. Nothing aired at all.',
   },
   {
     n: '04',
     title: 'Evidence produced',
-    body: 'A placement-by-placement audit with the evidence chain behind every result.',
+    body: 'Each finding ships with its evidence: hashes, offsets, match counts, timestamps. You can re-check any of it.',
   },
 ];
 
 const deliverables = [
   {
     title: 'Verification report',
-    body: 'Placement-by-placement status with CSV/JSON export and a PDF audit report.',
+    body: 'Placement-by-placement status for the whole campaign, delivered as a PDF plus CSV and JSON exports.',
     icon: 'report',
   },
   {
     title: 'Evidence chain',
-    body: 'Creative ID, version, hash, timestamp, matched duration, confidence — retained for every result.',
+    body: 'Creative ID, version, file hash, match offset, covered duration, confidence. Retained for every single result.',
     icon: 'chain',
   },
   {
     title: 'Exception review',
-    body: 'Every ambiguous case is flagged for manual review. Nothing is silently classified.',
+    body: 'Where the evidence is ambiguous, a person looks at it and says so in the report. Ambiguity is reported, not smoothed over.',
     icon: 'flag',
   },
 ];
@@ -55,7 +55,7 @@ const icons: Record<string, string> = {
 
 <Base
   title="Did your podcast ad actually run as contracted?"
-  description="Meyppi independently verifies whether contracted audio and video creatives appeared in published media — when they ran, which version, and whether delivery was complete."
+  description="Meyppi independently verifies whether contracted audio creatives appeared in published media: when they ran, which version, and whether delivery was complete."
 >
   <!-- ============ Hero ============ -->
   <section class="hero">
@@ -66,13 +66,13 @@ const icons: Record<string, string> = {
           Did your podcast ad actually run <span class="hero__em">as contracted?</span>
         </h1>
         <p class="hero__sub">
-          Meyppi independently verifies whether contracted audio creatives
-          appeared in published media — when they ran, which version, and
-          whether delivery was complete.
+          Meyppi checks published media itself: whether your creative
+          appeared, in which version, at what timestamp, and for how long.
+          Not what the publisher reports. What actually aired.
         </p>
         <div class="hero__ctas">
           <Button variant="primary" href="/contact">
-            Request a Campaign Audit <span class="arrow">→</span>
+            Request a Campaign Audit
           </Button>
           <Button variant="ghost" href="/sample-report">
             See a Sample Report
@@ -146,11 +146,11 @@ const icons: Record<string, string> = {
     <!-- trust strip -->
     <div class="hero__strip">
       <div class="container hero__strip-inner">
-        <span>Independent of publishers and agencies</span>
+        <span>We are not your agency and not your publisher</span>
         <span class="hero__strip-div" aria-hidden="true"></span>
-        <span>Every result classified — Detected, Not Detected, Insufficient Signal, or Manual Review Required</span>
+        <span>Four possible verdicts per placement, never a vague "verified"</span>
         <span class="hero__strip-div" aria-hidden="true"></span>
-        <span>Evidence, never legal proof</span>
+        <span>Evidence, on record. Not legal proof, and we say so</span>
       </div>
     </div>
   </section>
@@ -162,29 +162,30 @@ const icons: Record<string, string> = {
         <span class="kicker">The problem</span>
         <h2>Nobody independently confirms delivery.</h2>
       </div>
-      <div class="grid grid--3">
-        <div class="card card--accent reveal">
-          <span class="card__num">01</span>
+      <div class="rule-cols reveal">
+        <div>
           <h3>You paid for 240 placements.</h3>
           <p>
-            Your publisher reports 240. Your spreadsheet says 240. But nobody
-            independently confirmed it.
+            The publisher reports 240. Your spreadsheet says 240. The
+            invoice is for 240. And not one of those numbers came from
+            anyone whose job was to check.
           </p>
         </div>
-        <div class="card card--accent reveal">
-          <span class="card__num">02</span>
+        <div>
           <h3>You don't know what actually aired.</h3>
           <p>
-            Wrong version, trimmed duration, missing placements,
-            over-delivery. These are invisible in self-reported data.
+            A 24-second cut instead of 30. Version 2 instead of version 1.
+            An episode that quietly dropped out of the feed. Self-reported
+            data cannot see any of this, because it is the thing being
+            reported on.
           </p>
         </div>
-        <div class="card card--accent reveal">
-          <span class="card__num">03</span>
-          <h3>You can't prove it.</h3>
+        <div>
+          <h3>You can't prove it either way.</h3>
           <p>
-            Without independent evidence, discrepancies can't be reconciled
-            with a publisher or defended to a client.
+            When something feels wrong, the conversation stalls at "our
+            report says it ran." Without independent evidence there is no
+            reconciliation, no makegood, and nothing to show your client.
           </p>
         </div>
       </div>
@@ -217,9 +218,9 @@ const icons: Record<string, string> = {
         <span class="kicker">The deliverable</span>
         <h2>A discrepancy report you can put in front of a client.</h2>
         <p class="section__lede">
-          Every placement classified, every classification backed by an
-          evidence chain. This is the actual report format from a Meyppi
-          audit run.
+          Not a dashboard login, not a slide deck. A report: every placement
+          classified, every classification backed by evidence you can open
+          and inspect.
         </p>
       </div>
 
@@ -250,8 +251,8 @@ const icons: Record<string, string> = {
             </table>
           </div>
           <div class="preview__foot">
-            <a href="/sample-report">See the full sample report →</a>
-            <a href="/demo">Open the interactive demo →</a>
+            <a href="/sample-report">Read the full sample report</a>
+            <a href="/demo">Or explore it interactively</a>
           </div>
         </div>
       </div>
@@ -288,18 +289,20 @@ const icons: Record<string, string> = {
         <div class="card card--flat reveal">
           <h3>For agencies</h3>
           <p>
-            Independent verification for client reporting and publisher
-            reconciliation.
+            Your name is on the client report. Meyppi gives you numbers you
+            did not produce yourself, which is exactly what makes them worth
+            having when a placement is disputed.
           </p>
-          <a href="/for-agencies">How agencies use Meyppi →</a>
+          <a href="/for-agencies">How agencies work with us</a>
         </div>
         <div class="card card--flat reveal">
           <h3>For brands</h3>
           <p>
-            Direct visibility into whether contracted media actually ran —
-            independent of agency or publisher reporting.
+            You approve the plan and you pay the invoice. Verification that
+            starts from the published media tells you what ran, regardless
+            of what anyone's report says.
           </p>
-          <a href="/for-brands">How brands use Meyppi →</a>
+          <a href="/for-brands">How brands work with us</a>
         </div>
       </div>
     </div>
@@ -312,8 +315,9 @@ const icons: Record<string, string> = {
       <p class="trust__text">
         Meyppi verifies pre-produced audio creatives in podcast and digital
         audio content where the published media is independently observable.
-        We do not claim legal proof. Every result is classified as Detected,
-        Not Detected, Insufficient Signal, or Manual Review Required.
+        We do not claim legal proof. Every result comes back classified as
+        Detected, Not Detected, Insufficient Signal, or Manual Review
+        Required. If we cannot see the media, we do not guess.
       </p>
     </div>
   </section>
@@ -322,9 +326,9 @@ const icons: Record<string, string> = {
   <section class="cta-band">
     <div class="container">
       <h2>Give us one completed campaign.</h2>
-      <p>We'll return a discrepancy report.</p>
+      <p>We'll tell you exactly what ran, and back every line of it.</p>
       <Button variant="primary" href="/contact">
-        Request a Campaign Audit <span class="arrow">→</span>
+        Request a Campaign Audit
       </Button>
     </div>
   </section>

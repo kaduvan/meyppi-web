@@ -6,47 +6,70 @@ const steps = [
   {
     n: '01',
     title: 'You send us one campaign',
-    body: 'Master creatives, expected publishers, expected episodes, and campaign dates. One completed campaign is all we need to start.',
     icon: 'M4 4h16v12H4z M8 20h8',
+    body: [
+      'A completed campaign, not one mid-flight: the media has to be published before there is anything to verify. You send the master creative files, one per contracted version, and the placement plan from the insertion order: publishers, shows, episodes, flight dates.',
+      'A typical starting package is three to five creatives across up to twenty publishers and forty episodes. Historical campaigns are fine; lookback is limited mainly by what remains publicly available in the feeds.',
+    ],
   },
   {
     n: '02',
-    title: 'We ingest the published media',
-    body: 'RSS feeds, authorized sources, and customer-provided recordings. Every item is hashed and logged before processing.',
+    title: 'We collect the published media',
     icon: 'M4 12h6l2-5 4 10 2-5h2',
+    body: [
+      'We pull the published episodes from their RSS feeds and other sources we are authorised to use. If you hold recordings already, for example from a monitoring tool or a previous campaign, those go into the same pipeline.',
+      'Before anything is processed, each file is hashed and logged with its source. From this point on, every claim in the final report can be traced back to a specific file with a specific hash from a specific source. That provenance is what makes the evidence worth having.',
+    ],
   },
   {
     n: '03',
     title: 'We fingerprint and match',
-    body: 'Wang-style constellation fingerprinting with temporal alignment. Every match retains its raw evidence.',
     icon: 'M4 12h3l2-6 3 12 2-6h6',
+    body: [
+      'Every episode and every creative version is fingerprinted: a constellation of spectral peak pairs that describes what the audio sounds like, computed identically every run, robust to the compression and loudness processing podcasts go through.',
+      'Matching the creative against the episode produces candidate alignments, and the alignment that holds up across the whole runtime is the match. A true match shows thousands of agreeing hash pairs at one consistent time offset. Interference, cross-talk and music beds do not produce that signature.',
+    ],
   },
   {
     n: '04',
     title: 'We classify every placement',
-    body: 'Detected, Not Detected, Insufficient Signal, or Manual Review Required. Ambiguous cases are never silently resolved.',
     icon: 'M5 4h14v16H5z M9 10l2 2 4-4',
+    body: [
+      'Each expected placement is classified from the match forensics: Detected full, Detected partial, Version mismatch, Not detected, Insufficient signal, or Manual review required. The distinctions matter. A 24-second cut of a 30-second buy is not "delivered". Version 2 airing where version 1 was contracted is not "delivered".',
+      'When several versions of a creative exist, the classifier ranks the evidence between siblings before attributing a version, so a mismatch is a finding, not a guess. Anything the pipeline cannot resolve with confidence is escalated to a person, and the report says that is what happened.',
+    ],
   },
   {
     n: '05',
     title: 'You receive the report',
-    body: 'A placement-by-placement audit with CSV/JSON export and a PDF report with full evidence references.',
     icon: 'M6 4h12v16H6z M9 9h6 M9 13h6 M9 17h4',
+    body: [
+      'The deliverable is a report, not a login. A PDF you can forward, with an executive summary and a placement-by-placement table. CSV and JSON exports of the same data, so your finance or analytics team can work with it. And the raw verification events behind every row, so any single finding can be independently re-examined.',
+      'You will know where every rupee of that campaign actually landed, with the receipts attached.',
+    ],
   },
+];
+
+const checklist = [
+  'Master creative files for every contracted version (WAV or MP3, the actual aired cut)',
+  'Insertion order or placement plan: publishers, shows, episodes, flight dates',
+  'Campaign dates, and confirmation the campaign has finished airing',
+  'If you have them: existing recordings or monitoring exports (optional)',
+  'A contact who can answer questions about the contract when they come up',
 ];
 ---
 
 <Base
   title="How It Works"
-  description="Five steps from one completed campaign to a placement-by-placement discrepancy report with full evidence chain."
+  description="Five steps from one completed campaign to a placement-by-placement discrepancy report with full evidence chain. What you send, what we do, what you get back."
 >
   <section class="hiw-head">
     <div class="container hiw-head__narrow">
       <span class="kicker">Process</span>
       <h1>How a Meyppi audit works.</h1>
       <p class="hiw-head__sub">
-        One campaign in. One discrepancy report out. Every step produces
-        evidence you can hand to a publisher or a client.
+        You can read this page in two minutes and know exactly what you
+        would be paying for. That is deliberate.
       </p>
     </div>
   </section>
@@ -72,14 +95,14 @@ const steps = [
               </svg>
               {step.title}
             </h3>
-            <p>{step.body}</p>
+            {step.body.map((para) => <p>{para}</p>)}
           </li>
         ))}
       </ol>
 
       <div style="margin-top:48px; display:flex; gap:16px; flex-wrap:wrap">
         <Button variant="primary" href="/contact">
-          Request a Campaign Audit <span class="arrow">→</span>
+          Request a Campaign Audit
         </Button>
         <Button variant="secondary" href="/sample-report">
           See a Sample Report
@@ -88,13 +111,48 @@ const steps = [
     </div>
   </section>
 
+  <section class="section section--alt">
+    <div class="container prep">
+      <div class="prep__col">
+        <h2>What you need before starting</h2>
+        <p>
+          An audit can only be as good as the contract it checks against.
+          Everything on this list is something you already have if the
+          campaign ran.
+        </p>
+        <ul class="checklist">
+          {checklist.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div class="prep__col">
+        <h2>How long it takes</h2>
+        <p>
+          From receiving the creatives and media access, a typical
+          single-campaign audit completes in five to ten working days.
+          Processing itself is fast, over a thousand audio-minutes per
+          CPU-hour; the calendar time goes into source collection and into
+          the manual review of flagged placements, which we do not rush.
+        </p>
+        <p>
+          Historical lookback usually adds days rather than weeks, bounded
+          by what the feeds still serve. We tell you before starting if
+          expected sources cannot be reached, because "we could not obtain
+          the media" is a scope decision you should make, not a surprise in
+          the report.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="section section--dark">
     <div class="container narrow">
       <span class="kicker">Scope</span>
       <p class="scope-text">
-        V1 covers pre-produced audio creatives in podcast and digital audio
-        content. Dynamic ad insertion, host-read verification, and video
-        sources are planned for later stages.
+        V1 verifies pre-produced audio creatives in podcast and digital
+        audio content where the published media is independently
+        observable. Dynamic ad insertion, host-read verification, and video
+        sources are planned for later stages. If your campaign falls
+        outside that, we will say so before you pay anything, not after.
       </p>
     </div>
   </section>
@@ -121,7 +179,7 @@ const steps = [
     margin: 0;
   }
   .hiw-head__narrow {
-    max-width: calc(760px + 48px); /* match .narrow reading measure */
+    max-width: calc(760px + 48px);
   }
   .narrow {
     max-width: 760px;
@@ -137,7 +195,7 @@ const steps = [
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   .tl-icon {
     width: 22px;
@@ -146,12 +204,34 @@ const steps = [
     color: var(--teal-dark);
   }
   .timeline-v p {
+    color: var(--body);
+    margin: 0 0 0.9em;
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 62ch;
+  }
+  .timeline-v p:last-child {
+    margin-bottom: 0;
+  }
+  .prep {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 5vw, 64px);
+  }
+  .prep h2 {
+    font-size: 1.4rem;
+  }
+  .prep p {
     color: var(--muted);
-    margin: 0;
   }
   .scope-text {
     font-size: 1.1rem;
     max-width: 62ch;
     margin: 0;
+  }
+  @media (max-width: 900px) {
+    .prep {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

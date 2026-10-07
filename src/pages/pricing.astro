@@ -5,27 +5,35 @@ import Button from '../components/Button.astro';
 const faqs = [
   {
     q: 'What counts as a campaign?',
-    a: 'One contracted media buy with a defined flight period: a set of creatives, publishers, and expected placements. A typical audit covers up to 5 creatives across up to 20 publishers and 40 episodes.',
+    a: 'One contracted media buy with a defined flight period: a set of creatives, publishers, and expected placements, finished and published. The standard scope is up to 5 creatives across up to 20 publishers and 40 episodes, including historical lookback. Ten placements across three shows and one campaign flighting across eight shows are both one campaign; two separate products with separate insertion orders are two.',
   },
   {
     q: 'What do you need from us?',
-    a: 'The master creative files (every version that was contracted), the placement plan or insertion order, and access to the published media — RSS feeds, authorized downloads, or recordings you already hold.',
+    a: 'Three things. The master creative files, one per contracted version, the exact cuts that were supposed to air. The placement plan or insertion order, so we know what "correct delivery" means. And access to the published media, which usually means nothing more than the public RSS feeds, plus any recordings you already hold if you want them included. We confirm scope and sources with you before starting.',
   },
   {
     q: 'What if a placement is ambiguous?',
-    a: 'It is classified as Insufficient Signal or Manual Review Required, never silently resolved. Every ambiguous case appears in the report with the reason it could not be automatically classified.',
+    a: 'It is classified as Insufficient Signal or Manual Review Required, and the report tells you which and why. An episode published at low bitrate, or with heavy talk-over the creative, can be genuinely undecidable, and we report that honestly rather than leaning on a borderline score. Flagged placements are examined by a person before the report ships. You are never shown a number that is quietly a guess.',
   },
   {
     q: 'Do you verify dynamic ad insertion?',
-    a: 'Not in V1. We verify pre-produced audio creatives in podcast and digital audio content where the published media is independently observable. DAI verification is planned for a later stage.',
+    a: 'Not in V1. DAI placements vary per listener, so the published feed often does not contain the ad that any individual heard, and honest verification requires a different evidence model, for example server logs or a measurement integration. We verify pre-produced audio creatives in podcast and digital audio where the published media is independently observable. If your campaign is DAI-heavy we will tell you at scoping that we are the wrong tool for it.',
   },
   {
     q: 'Is this legal proof?',
-    a: 'No. Meyppi produces evidence — verification results with confidence levels and a documented methodology. We never describe algorithmic confidence as legal proof.',
+    a: 'No, and anyone who sells you "court-ready" ad verification should be asked hard questions. A Meyppi audit is evidence: documented, repeatable findings with confidence levels, hashes, and a written methodology. That is the right standard for reconciling with a publisher, supporting a makegood, or reporting to a client. Courts set their own standards, and we do not claim to meet them.',
   },
   {
     q: 'How long does an audit take?',
-    a: 'A typical single-campaign audit completes within 5 to 10 working days of receiving the creatives and media access, depending on the number of episodes and sources.',
+    a: 'Five to ten working days from receiving the creatives and media access, for a standard single campaign. The compute is fast, over a thousand audio-minutes per hour; the time goes into collecting sources and manually reviewing flagged placements, which is where accuracy actually comes from. Historical lookback adds days rather than weeks, depending on what the feeds still serve. If a source turns out to be unreachable we tell you immediately and you decide whether to proceed with reduced scope.',
+  },
+  {
+    q: 'What happens if the audit finds nothing wrong?',
+    a: 'Then you have bought certainty, which is what most audits find. The report is identical in format either way: every placement classified, evidence attached. A clean report has real value in client reviews and internal sign-off, and we do not shade the process toward finding problems, because a verification company that needs discrepancies is a verification company with a conflict of interest.',
+  },
+  {
+    q: 'Who sees the results?',
+    a: 'Only you. The audit is commissioned by you and delivered to you. We do not publish findings, share campaign data with publishers, or use your material in case studies without written permission. Creative files and media are processed solely to produce your report and are handled per the privacy policy.',
   },
 ];
 ---
@@ -45,7 +53,7 @@ const faqs = [
 
       <div class="grid grid--2 pricing-grid">
         <div class="card card--accent plan reveal">
-          <span class="kicker">Campaign Audit — V1</span>
+          <span class="kicker">Campaign Audit (V1)</span>
           <div class="plan__price">₹15,000–₹25,000</div>
           <p class="plan__per">per campaign, fixed fee</p>
           <ul class="plan__list">
@@ -67,7 +75,7 @@ const faqs = [
         </div>
 
         <div class="card plan plan--muted reveal">
-          <span class="kicker">Continuous Monitoring — V2</span>
+          <span class="kicker">Continuous Monitoring (V2)</span>
           <div class="plan__price">Contact us</div>
           <p class="plan__per">waitlist, per-organization</p>
           <ul class="plan__list">
