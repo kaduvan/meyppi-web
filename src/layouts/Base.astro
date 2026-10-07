@@ -7,9 +7,27 @@ import { SITE } from '../lib/site';
 interface Props {
   title: string;
   description?: string;
+  noindex?: boolean;
 }
-const { title, description = SITE.description } = Astro.props;
+const { title, description = SITE.description, noindex = false } = Astro.props;
 const fullTitle = `${title} — Meyppi`;
+const canonical = new URL(Astro.url.pathname, SITE.url);
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Meyppi',
+  url: SITE.url,
+  logo: new URL('/brand/logo-full.png', SITE.url).href,
+  description:
+    'Independent media delivery verification. Meyppi verifies whether contracted audio creatives appeared in published media — which version, when, and whether delivery was complete.',
+  areaServed: 'IN',
+  knowsAbout: [
+    'media delivery verification',
+    'podcast advertising audits',
+    'acoustic fingerprinting',
+  ],
+};
 ---
 
 <!doctype html>
@@ -19,7 +37,8 @@ const fullTitle = `${title} — Meyppi`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, SITE.url)} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta name="theme-color" content="#1B2A4A" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -30,7 +49,7 @@ const fullTitle = `${title} — Meyppi`;
     <meta property="og:site_name" content="Meyppi" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={new URL(Astro.url.pathname, SITE.url)} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL('/og.png', SITE.url)} />
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -40,6 +59,7 @@ const fullTitle = `${title} — Meyppi`;
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     />
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -48,6 +68,28 @@ const fullTitle = `${title} — Meyppi`;
       <slot />
     </main>
     <Footer />
+
+    <script>
+      // progressive-enhancement scroll reveal (no-op with reduced motion —
+      // CSS forces .reveal visible)
+      const els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && els.length) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px' },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
 
     {
       SITE.analyticsToken && (

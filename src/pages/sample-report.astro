@@ -165,6 +165,20 @@ const evidenceEvent = {
         </table>
       </div>
 
+      <div class="demo-callout">
+        <div>
+          <h3>Explore this report interactively</h3>
+          <p>
+            Filter by classification, open any placement, and inspect the
+            verification event and timeline evidence behind it — in the
+            interactive version of this report.
+          </p>
+        </div>
+        <a class="btn btn--primary" href="/demo">
+          Open the demo <span class="arrow">→</span>
+        </a>
+      </div>
+
       <!-- Evidence example -->
       <h2 style="margin-top:48px">Evidence — one verification event</h2>
       <p>
@@ -253,13 +267,35 @@ const evidenceEvent = {
     color: var(--muted);
   }
   .evidence {
-    background: var(--indigo);
-    color: #e6ebf2;
+    background: var(--indigo-deep);
+    color: #d7e2f2;
     padding: 24px;
     border-radius: var(--radius);
     overflow-x: auto;
     font-size: 13px;
     line-height: 1.5;
+  }
+  .demo-callout {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 26px 28px;
+    border: 1px solid var(--teal);
+    border-left-width: 4px;
+    border-radius: var(--radius-lg);
+    background: var(--teal-tint);
+  }
+  .demo-callout h3 {
+    margin-bottom: 6px;
+  }
+  .demo-callout p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 56ch;
   }
   @media (max-width: 900px) {
     .summary-grid {

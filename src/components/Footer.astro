@@ -1,5 +1,7 @@
 ---
 /** Footer per brief §4: dark indigo, 4 columns, மெய் watermark. */
+import Logo from './Logo.astro';
+
 const year = new Date().getFullYear();
 
 const columns = [
@@ -16,6 +18,7 @@ const columns = [
       { href: '/how-it-works', label: 'How It Works' },
       { href: '/pricing', label: 'Pricing' },
       { href: '/sample-report', label: 'Sample Report' },
+      { href: '/demo', label: 'Interactive Demo' },
     ],
   },
   {
@@ -38,6 +41,13 @@ const columns = [
 <footer class="footer">
   <span class="footer__watermark" aria-hidden="true">மெய்</span>
   <div class="container">
+    <div class="footer__brand">
+      <Logo variant="reverse" width={150} />
+      <p class="footer__tag">
+        Independent media delivery verification. From Tamil <em>mei</em> (மெய்)
+        — truth.
+      </p>
+    </div>
     <div class="footer__grid">
       {columns.map((col) => (
         <div>
@@ -51,18 +61,19 @@ const columns = [
       ))}
     </div>
     <div class="footer__bottom">
-      © {year} Meyppi. Independent media delivery verification.
+      <span>© {year} Meyppi. Independent media delivery verification.</span>
+      <span>Every result classified. Never legal proof.</span>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    background: var(--indigo);
+    background: var(--indigo-deep);
     color: var(--white);
     position: relative;
     overflow: hidden;
-    padding: 56px 0 28px;
+    padding: 64px 0 28px;
   }
   .footer__watermark {
     position: absolute;
@@ -71,9 +82,23 @@ const columns = [
     font-size: 200px;
     line-height: 1;
     color: var(--teal);
-    opacity: 0.2;
+    opacity: 0.16;
     pointer-events: none;
     user-select: none;
+  }
+  .footer__brand {
+    margin-bottom: 44px;
+    max-width: 360px;
+    position: relative;
+  }
+  .footer__tag {
+    margin: 14px 0 0;
+    font-size: 14px;
+    color: #9fabc2;
+  }
+  .footer__tag em {
+    font-style: normal;
+    color: var(--teal);
   }
   .footer__grid {
     display: grid;
@@ -111,11 +136,17 @@ const columns = [
     padding-top: 20px;
     font-size: 13px;
     color: #d8dde5;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
   }
-  @media (max-width: 640px) {
+  @media (max-width: 900px) {
     .footer__grid {
       grid-template-columns: repeat(2, 1fr);
     }
+  }
+  @media (max-width: 640px) {
     .footer__watermark {
       font-size: 130px;
     }

@@ -1,41 +1,56 @@
 ---
 import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
 ---
 
 <Base
   title="About"
   description="Meyppi is an independent media delivery verification company. From Tamil mei (மெய்) — truth."
 >
+  <section class="about-head">
+    <div class="container about-head__grid">
+      <div>
+        <span class="kicker">About</span>
+        <h1>Verification that starts from the media itself.</h1>
+        <p>
+          Meyppi is an independent media delivery verification company. We
+          verify whether contracted creatives appeared in published content —
+          when they ran, which version, and whether delivery was complete —
+          using acoustic fingerprint evidence rather than self-reported
+          numbers.
+        </p>
+      </div>
+      <div class="about-head__mark" aria-hidden="true">
+        <Logo variant="mark" width={280} />
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container narrow">
-      <span class="kicker">About</span>
-      <h1>Verification that starts from the media itself.</h1>
+      <div class="about-block reveal">
+        <span class="about-glyph" aria-hidden="true">மெய்</span>
+        <h2>The name</h2>
+        <p>
+          Meyppi comes from the Tamil word <em>mei</em> (மெய்) — truth, or
+          real. It is the standard we hold our own results to: what we report
+          is what the evidence supports, nothing more.
+        </p>
+      </div>
 
-      <p>
-        Meyppi is an independent media delivery verification company. We
-        verify whether contracted creatives appeared in published content —
-        when they ran, which version, and whether delivery was complete —
-        using acoustic fingerprint evidence rather than self-reported
-        numbers.
-      </p>
-
-      <h2 style="margin-top:40px">The name</h2>
-      <p>
-        Meyppi comes from the Tamil word <em>mei</em> (மெய்) — truth, or
-        real. It is the standard we hold our own results to: what we report
-        is what the evidence supports, nothing more.
-      </p>
-
-      <h2 style="margin-top:40px">Independence and evidence standards</h2>
-      <p>
-        We verify from published media, not from publisher reports. Every
-        result carries its evidence chain — creative identity, version,
-        timestamps, matched duration, and confidence — and every ambiguous
-        case is classified as Insufficient Signal or Manual Review
-        Required rather than silently resolved. We do not claim legal
-        proof. Algorithmic findings are evidence, and we label them as
-        such.
-      </p>
+      <div class="about-block reveal">
+        <span class="about-glyph" aria-hidden="true">◈</span>
+        <h2>Independence and evidence standards</h2>
+        <p>
+          We verify from published media, not from publisher reports. Every
+          result carries its evidence chain — creative identity, version,
+          timestamps, matched duration, and confidence — and every ambiguous
+          case is classified as Insufficient Signal or Manual Review
+          Required rather than silently resolved. We do not claim legal
+          proof. Algorithmic findings are evidence, and we label them as
+          such.
+        </p>
+      </div>
 
       <p class="note">
         Meyppi is based in India and works with agencies and brands on
@@ -48,5 +63,71 @@ import Base from '../layouts/Base.astro';
 <style>
   .narrow {
     max-width: 720px;
+  }
+  .about-head {
+    background: var(--indigo-deep);
+    background-image: var(--grid-dots);
+    padding: clamp(56px, 7vw, 88px) 0;
+    color: var(--white);
+  }
+  .about-head .kicker {
+    color: var(--teal);
+  }
+  .about-head h1 {
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .about-head p {
+    color: #c9d3e4;
+    font-size: 1.1rem;
+    max-width: 54ch;
+    margin: 0;
+  }
+  .about-head__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .about-head__mark {
+    display: flex;
+    justify-content: center;
+  }
+  .about-block {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--grey-soft);
+  }
+  .about-block:last-of-type {
+    border-bottom: none;
+  }
+  .about-block h2 {
+    margin-bottom: 10px;
+  }
+  .about-block p {
+    color: var(--body);
+    font-size: 1.05rem;
+  }
+  .about-block em {
+    font-style: normal;
+    color: var(--teal-dark);
+    font-weight: 600;
+  }
+  .about-glyph {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius);
+    background: var(--teal-tint);
+    color: var(--teal-dark);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 900px) {
+    .about-head__grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

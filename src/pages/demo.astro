@@ -1,0 +1,553 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+
+// Illustrative data from a real Meyppi engine run on a synthetic demo
+// campaign (same pipeline and report format as a paid audit). Identifiers
+// redacted. Per-placement evidence fields mirror the engine's
+// verification-event export.
+const placements = [
+  {
+    id: 'EP-1041',
+    publisher: 'Publisher A (redacted)',
+    expected: 'CR-A v1 · 30s',
+    observed: 'CR-A v1 · 30.0s @ 00:01:30',
+    cls: 'full',
+    clsLabel: 'Detected — Full',
+    conf: '0.99',
+    episodeSec: 2530,
+    evidence: {
+      event_id: 'VE_CMP_XXXXX_CR-A_v1_EP-1041',
+      campaign_id: 'CMP-XXXXX',
+      creative_id: 'CR-A',
+      version_tag: 'v1',
+      source_id: 'SRC_POD-1',
+      content_id: 'EP-1041',
+      timestamp: '2026-10-07T12:00:00+00:00',
+      match_type: 'full',
+      duration_sec: 30.0,
+      evidence_tier: 2,
+      confidence: 0.99,
+      processing: {
+        engine: 'aircheck-fingerprint',
+        attributed_version: 'v1',
+        content_sha256: '9f2c…a41d (redacted)',
+      },
+      evidence: {
+        offset_sec: 90.001,
+        covered_time_sec: 30.0,
+        coverage_ratio: 1.0,
+        match_count: 3350,
+        missing_head_sec: 0.0,
+        missing_tail_sec: 0.0,
+      },
+    },
+  },
+  {
+    id: 'EP-1042',
+    publisher: 'Publisher A (redacted)',
+    expected: 'CR-A v1 · 30s',
+    observed: 'CR-A v1 · 24.0s (tail missing 5.8s)',
+    cls: 'partial',
+    clsLabel: 'Detected — Partial',
+    conf: '0.90',
+    episodeSec: 2410,
+    evidence: {
+      event_id: 'VE_CMP_XXXXX_CR-A_v1_EP-1042',
+      campaign_id: 'CMP-XXXXX',
+      creative_id: 'CR-A',
+      version_tag: 'v1',
+      source_id: 'SRC_POD-1',
+      content_id: 'EP-1042',
+      timestamp: '2026-10-07T12:00:41+00:00',
+      match_type: 'partial',
+      duration_sec: 24.0,
+      evidence_tier: 2,
+      confidence: 0.9,
+      processing: {
+        engine: 'aircheck-fingerprint',
+        attributed_version: 'v1',
+        content_sha256: '31bd…77e9 (redacted)',
+      },
+      evidence: {
+        offset_sec: 412.66,
+        covered_time_sec: 24.0,
+        coverage_ratio: 0.8,
+        match_count: 2684,
+        missing_head_sec: 0.0,
+        missing_tail_sec: 5.8,
+      },
+    },
+  },
+  {
+    id: 'EP-1043',
+    publisher: 'Publisher B (redacted)',
+    expected: 'CR-A v1 · 30s',
+    observed: 'CR-A v2 aired (version substituted)',
+    cls: 'mismatch',
+    clsLabel: 'Version Mismatch',
+    conf: '0.90',
+    episodeSec: 2680,
+    evidence: {
+      event_id: 'VE_CMP_XXXXX_CR-A_v2_EP-1043',
+      campaign_id: 'CMP-XXXXX',
+      creative_id: 'CR-A',
+      version_tag: 'v2',
+      source_id: 'SRC_POD-2',
+      content_id: 'EP-1043',
+      timestamp: '2026-10-07T12:01:22+00:00',
+      match_type: 'version_mismatch',
+      duration_sec: 30.0,
+      evidence_tier: 2,
+      confidence: 0.9,
+      processing: {
+        engine: 'aircheck-fingerprint',
+        attributed_version: 'v2',
+        content_sha256: 'c50a…19f4 (redacted)',
+      },
+      evidence: {
+        offset_sec: 1188.9,
+        covered_time_sec: 30.0,
+        coverage_ratio: 1.0,
+        match_count: 3211,
+        sibling_rank: { v1: 41, v2: 3211 },
+      },
+    },
+  },
+  {
+    id: 'EP-1044',
+    publisher: 'Publisher B (redacted)',
+    expected: 'CR-A v1 · 30s',
+    observed: 'No occurrence found',
+    cls: 'notdetected',
+    clsLabel: 'Not Detected',
+    conf: '0.95',
+    episodeSec: 2260,
+    evidence: {
+      event_id: 'VE_CMP_XXXXX_CR-A_v1_EP-1044',
+      campaign_id: 'CMP-XXXXX',
+      creative_id: 'CR-A',
+      version_tag: 'v1',
+      source_id: 'SRC_POD-2',
+      content_id: 'EP-1044',
+      timestamp: '2026-10-07T12:01:58+00:00',
+      match_type: 'not_detected',
+      duration_sec: 0.0,
+      evidence_tier: 2,
+      confidence: 0.95,
+      processing: {
+        engine: 'aircheck-fingerprint',
+        attributed_version: null,
+        content_sha256: '77ce…02ab (redacted)',
+      },
+      evidence: {
+        offset_sec: null,
+        covered_time_sec: 0.0,
+        coverage_ratio: 0.0,
+        match_count: 0,
+      },
+    },
+  },
+  {
+    id: 'EP-1045',
+    publisher: 'Publisher C (redacted)',
+    expected: 'CR-A v2 · 30s',
+    observed: 'CR-A v2 · 30.0s @ 00:10:12',
+    cls: 'full',
+    clsLabel: 'Detected — Full',
+    conf: '0.99',
+    episodeSec: 2980,
+    evidence: {
+      event_id: 'VE_CMP_XXXXX_CR-A_v2_EP-1045',
+      campaign_id: 'CMP-XXXXX',
+      creative_id: 'CR-A',
+      version_tag: 'v2',
+      source_id: 'SRC_POD-3',
+      content_id: 'EP-1045',
+      timestamp: '2026-10-07T12:02:30+00:00',
+      match_type: 'full',
+      duration_sec: 30.0,
+      evidence_tier: 2,
+      confidence: 0.99,
+      processing: {
+        engine: 'aircheck-fingerprint',
+        attributed_version: 'v2',
+        content_sha256: 'b1d9…6c3e (redacted)',
+      },
+      evidence: {
+        offset_sec: 612.4,
+        covered_time_sec: 30.0,
+        coverage_ratio: 1.0,
+        match_count: 3402,
+        missing_head_sec: 0.0,
+        missing_tail_sec: 0.0,
+      },
+    },
+  },
+];
+
+const fmtTime = (s: number) =>
+  `${String(Math.floor(s / 3600)).padStart(2, '0')}:${String(
+    Math.floor((s % 3600) / 60),
+  ).padStart(2, '0')}:${String(Math.round(s % 60)).padStart(2, '0')}`;
+---
+
+<Base
+  title="Interactive Demo"
+  description="An interactive demo of the Meyppi campaign audit report: filter placements, inspect evidence, and see how every classification is backed."
+  noindex
+>
+  <section class="demo-head">
+    <div class="container">
+      <div class="demo-head__row">
+        <div>
+          <span class="kicker">Illustrative demo · synthetic data</span>
+          <h1>Campaign Delivery Audit</h1>
+          <p class="demo-head__meta">
+            Campaign <strong>CMP-XXXXX</strong> (redacted) · Client
+            [Redacted] · Audit period 01–31 Oct 2026 · Audit date 07 Oct 2026
+          </p>
+        </div>
+        <Logo variant="mark-reverse" width={150} />
+      </div>
+      <p class="demo-head__note">
+        This demo runs on data from a real Meyppi engine execution against an
+        illustrative synthetic campaign. In production this page is gated
+        behind authentication and shows your campaign data.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- summary -->
+      <div class="summary">
+        <div class="stat"><span class="stat__num">5</span><span class="stat__label">Expected</span></div>
+        <div class="stat"><span class="stat__num">2</span><span class="stat__label">Verified full</span></div>
+        <div class="stat"><span class="stat__num">1</span><span class="stat__label">Partial</span></div>
+        <div class="stat"><span class="stat__num">1</span><span class="stat__label">Version mismatch</span></div>
+        <div class="stat"><span class="stat__num">1</span><span class="stat__label">Not detected</span></div>
+      </div>
+
+      <!-- filters -->
+      <div class="filters" role="group" aria-label="Filter placements by classification">
+        <button class="filters__btn is-active" data-filter="all">All <span>5</span></button>
+        <button class="filters__btn" data-filter="full">Detected — Full <span>2</span></button>
+        <button class="filters__btn" data-filter="partial">Partial <span>1</span></button>
+        <button class="filters__btn" data-filter="mismatch">Version Mismatch <span>1</span></button>
+        <button class="filters__btn" data-filter="notdetected">Not Detected <span>1</span></button>
+      </div>
+
+      <!-- table -->
+      <div class="table-wrap demo-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Content</th>
+              <th>Publisher</th>
+              <th>Expected</th>
+              <th>Observed</th>
+              <th>Classification</th>
+              <th>Confidence</th>
+              <th><span class="sr-only">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {placements.map((p, i) => (
+              <>
+                <tr data-cls={p.cls} data-row={i} class="demo-row" tabindex="0"
+                    aria-expanded="false" role="button"
+                    aria-label={`Toggle evidence for ${p.id}`}>
+                  <td class="mono">{p.id}</td>
+                  <td>{p.publisher}</td>
+                  <td>{p.expected}</td>
+                  <td>{p.observed}</td>
+                  <td><span class={`chip chip--${p.cls}`}>{p.clsLabel}</span></td>
+                  <td class="mono">{p.conf}</td>
+                  <td class="demo-row__chev" aria-hidden="true">▾</td>
+                </tr>
+                <tr class="demo-ev" data-ev={i} hidden>
+                  <td colspan="7">
+                    <div class="demo-ev__inner">
+                      <div class="demo-ev__timeline">
+                        <h4>Placement in episode timeline</h4>
+                        <p class="demo-ev__ep meta">{p.id} · {fmtTime(p.episodeSec)} runtime</p>
+                        <svg viewBox="0 0 560 56" role="img"
+                             aria-label={`Match position within episode ${p.id}`}>
+                          <rect x="2" y="22" width="556" height="12" rx="6"
+                                fill="var(--grey-soft)"/>
+                          {p.evidence.evidence.offset_sec != null && (
+                            <rect
+                              x={2 + (p.evidence.evidence.offset_sec / p.episodeSec) * 556}
+                              y="14"
+                              width={Math.max(8, (p.evidence.duration_sec / p.episodeSec) * 556)}
+                              height="28"
+                              rx="3"
+                              class="demo-ev__seg"
+                            />
+                          )}
+                          {p.evidence.evidence.offset_sec != null && (
+                            <text
+                              x={Math.min(
+                                540,
+                                2 + (p.evidence.evidence.offset_sec / p.episodeSec) * 556,
+                              )}
+                              y="10"
+                              class="demo-ev__seglabel">
+                              {fmtTime(p.evidence.evidence.offset_sec)}
+                            </text>
+                          )}
+                        </svg>
+                        <p class="meta">
+                          {p.evidence.match_type === 'not_detected'
+                            ? 'No admissible occurrence of the creative was found in the published media.'
+                            : `Offset ${p.evidence.evidence.offset_sec}s · covered ${p.evidence.evidence.covered_time_sec}s of ${p.evidence.duration_sec}s (ratio ${p.evidence.evidence.coverage_ratio})`}
+                        </p>
+                      </div>
+                      <div class="demo-ev__json">
+                        <h4>Verification event</h4>
+                        <pre><code>{JSON.stringify(p.evidence, null, 2)}</code></pre>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="note" style="margin-top:24px">
+        Meyppi reports algorithmic findings from acoustic fingerprint
+        evidence. Algorithmic confidence is not legal proof. Every ambiguous
+        case is classified as Insufficient Signal or Manual Review Required —
+        never silently resolved.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .demo-head {
+    background: var(--indigo-deep);
+    background-image: var(--grid-dots);
+    color: var(--white);
+    padding: clamp(48px, 6vw, 72px) 0;
+  }
+  .demo-head__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .demo-head .kicker {
+    color: var(--teal);
+  }
+  .demo-head h1 {
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .demo-head__meta {
+    color: #9fabc2;
+    font-size: 15px;
+    margin: 0;
+  }
+  .demo-head__meta strong {
+    color: #d8dde5;
+  }
+  .demo-head__note {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #9fabc2;
+    border-left: 3px solid var(--teal);
+    padding-left: 14px;
+    max-width: 72ch;
+  }
+
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .summary > div {
+    border: 1px solid var(--grey-soft);
+    border-radius: var(--radius-lg);
+    padding: 18px 16px;
+    text-align: center;
+    background: var(--white);
+    box-shadow: var(--shadow-1);
+  }
+
+  .filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .filters__btn {
+    font-family: var(--font);
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--grey);
+    background: var(--white);
+    color: var(--indigo);
+    cursor: pointer;
+    transition: all 140ms ease;
+  }
+  .filters__btn span {
+    color: var(--muted);
+    font-weight: 500;
+    margin-left: 4px;
+  }
+  .filters__btn:hover {
+    border-color: var(--indigo);
+  }
+  .filters__btn.is-active {
+    background: var(--indigo);
+    border-color: var(--indigo);
+    color: var(--white);
+  }
+  .filters__btn.is-active span {
+    color: var(--teal);
+  }
+
+  .demo-table {
+    border: 1px solid var(--grey-soft);
+    border-radius: var(--radius-lg);
+    background: var(--white);
+    box-shadow: var(--shadow-1);
+  }
+  .demo-table table {
+    margin: 0;
+  }
+  .demo-table th,
+  .demo-table td {
+    padding: 14px 16px;
+  }
+  .demo-row {
+    cursor: pointer;
+    transition: background-color 120ms ease;
+  }
+  .demo-row:hover {
+    background: var(--off-white);
+  }
+  .demo-row[aria-expanded='true'] {
+    background: var(--teal-tint);
+  }
+  .demo-row__chev {
+    color: var(--muted);
+    transition: transform 160ms ease;
+    width: 24px;
+  }
+  .demo-row[aria-expanded='true'] .demo-row__chev {
+    transform: rotate(180deg);
+  }
+
+  .demo-ev__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    padding: 8px 4px 12px;
+  }
+  .demo-ev h4 {
+    margin: 0 0 6px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .demo-ev__ep {
+    font-weight: 600;
+    color: var(--indigo);
+  }
+  .demo-ev .meta {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin: 6px 0;
+  }
+  .demo-ev__seg {
+    fill: var(--teal);
+    fill-opacity: 0.85;
+  }
+  .demo-ev__seglabel {
+    font-family: var(--mono);
+    font-size: 11px;
+    fill: var(--teal-dark);
+    font-weight: 600;
+  }
+  .demo-ev__json pre {
+    background: var(--indigo-deep);
+    color: #d7e2f2;
+    padding: 16px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-size: 12px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  @media (max-width: 900px) {
+    .summary {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .demo-ev__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const rows = [...document.querySelectorAll('.demo-row')];
+  const filterBtns = [...document.querySelectorAll('.filters__btn')];
+
+  function toggle(row: HTMLElement) {
+    const i = row.dataset.row;
+    const ev = document.querySelector(`.demo-ev[data-ev="${i}"]`);
+    if (!ev) return;
+    const open = ev.hasAttribute('hidden');
+    if (open) {
+      ev.removeAttribute('hidden');
+      row.setAttribute('aria-expanded', 'true');
+    } else {
+      ev.setAttribute('hidden', '');
+      row.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  rows.forEach((row) => {
+    row.addEventListener('click', () => toggle(row));
+    row.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle(row);
+      }
+    });
+  });
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const f = btn.dataset.filter;
+      rows.forEach((row) => {
+        const i = row.dataset.row;
+        const ev = document.querySelector(`.demo-ev[data-ev="${i}"]`);
+        const show = f === 'all' || row.dataset.cls === f;
+        (row as HTMLElement).style.display = show ? '' : 'none';
+        if (ev) (ev as HTMLElement).style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>

@@ -44,7 +44,7 @@ const faqs = [
       </p>
 
       <div class="grid grid--2 pricing-grid">
-        <div class="card plan">
+        <div class="card card--accent plan reveal">
           <span class="kicker">Campaign Audit — V1</span>
           <div class="plan__price">₹15,000–₹25,000</div>
           <p class="plan__per">per campaign, fixed fee</p>
@@ -66,7 +66,7 @@ const faqs = [
           </Button>
         </div>
 
-        <div class="card plan plan--muted">
+        <div class="card plan plan--muted reveal">
           <span class="kicker">Continuous Monitoring — V2</span>
           <div class="plan__price">Contact us</div>
           <p class="plan__per">waitlist, per-organization</p>
@@ -114,7 +114,7 @@ const faqs = [
     flex-direction: column;
   }
   .plan__price {
-    font-size: 2.2rem;
+    font-size: clamp(1.9rem, 3vw, 2.4rem);
     font-weight: 700;
     color: var(--indigo);
     letter-spacing: -0.02em;
@@ -122,6 +122,9 @@ const faqs = [
   .plan__per {
     color: var(--muted);
     margin-bottom: 18px;
+  }
+  .plan .btn {
+    width: 100%;
   }
   .plan__list {
     list-style: none;

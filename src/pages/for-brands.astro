@@ -7,25 +7,29 @@ import Button from '../components/Button.astro';
   title="For Brands"
   description="Direct visibility into whether contracted media actually ran — independent of agency or publisher reporting."
 >
-  <section class="section">
+  <section class="page-head">
     <div class="container narrow">
       <span class="kicker">For brands</span>
       <h1>Know what actually ran.</h1>
-      <p class="section__lede">
+      <p class="page-head__sub">
         You approve the plan and you see the invoice. What runs in between
         is reported to you by the same people who sold it. Meyppi closes
         that gap with independent verification.
       </p>
+    </div>
+  </section>
 
-      <div class="grid grid--3" style="margin-top:40px">
-        <div class="card">
+  <section class="section">
+    <div class="container narrow">
+      <div class="grid grid--3" style="margin-top:0">
+        <div class="card reveal">
           <h3>Budget accountability</h3>
           <p>
             Verify that the placements you paid for actually aired —
             complete, in the right version, on the contracted episodes.
           </p>
         </div>
-        <div class="card">
+        <div class="card reveal">
           <h3>Independent of everyone</h3>
           <p>
             Meyppi is neither your agency nor your publisher. Verification
@@ -33,7 +37,7 @@ import Button from '../components/Button.astro';
             report.
           </p>
         </div>
-        <div class="card">
+        <div class="card reveal">
           <h3>Evidence, not assurances</h3>
           <p>
             Every placement comes back classified — Detected, Not Detected,
@@ -45,7 +49,7 @@ import Button from '../components/Button.astro';
 
       <div style="margin-top:48px">
         <Button variant="primary" href="/contact">
-          Request a Campaign Audit
+          Request a Campaign Audit <span class="arrow">→</span>
         </Button>
       </div>
     </div>
@@ -55,5 +59,24 @@ import Button from '../components/Button.astro';
 <style>
   .narrow {
     max-width: 900px;
+  }
+  .page-head {
+    background: var(--indigo-deep);
+    background-image: var(--grid-dots);
+    padding: clamp(56px, 7vw, 88px) 0;
+    color: var(--white);
+  }
+  .page-head .kicker {
+    color: var(--teal);
+  }
+  .page-head h1 {
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .page-head__sub {
+    color: #c9d3e4;
+    font-size: 1.15rem;
+    max-width: 58ch;
+    margin: 0;
   }
 </style>

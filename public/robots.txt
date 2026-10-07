@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /demo/
 
 Sitemap: https://meyppi.com/sitemap-index.xml

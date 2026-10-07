@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+import Button from '../components/Button.astro';
+---
+
+<Base
+  title="Page not found"
+  description="The page you requested does not exist."
+>
+  <section class="nf">
+    <div class="container nf__inner">
+      <Logo variant="mark" width={180} />
+      <p class="nf__code mono">404</p>
+      <h1>This page doesn't exist.</h1>
+      <p class="nf__sub">
+        The link may be outdated, or the page may have moved. Nothing was
+        verified in the making of this error.
+      </p>
+      <div class="nf__ctas">
+        <Button variant="primary" href="/">Back to home</Button>
+        <Button variant="secondary" href="/contact">Contact us</Button>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    padding: clamp(72px, 10vw, 128px) 0;
+    background: var(--off-white);
+  }
+  .nf__inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .nf__code {
+    font-size: 14px;
+    color: var(--teal-dark);
+    letter-spacing: 0.2em;
+    margin-top: 20px;
+  }
+  .nf__sub {
+    color: var(--muted);
+    max-width: 46ch;
+    margin-bottom: 20px;
+  }
+  .nf__ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+</style>

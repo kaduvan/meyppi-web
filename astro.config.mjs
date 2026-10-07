@@ -5,6 +5,11 @@ import sitemap from '@astrojs/sitemap';
 // DNS is attached; canonical/sitemap already point at the final domain).
 export default defineConfig({
   site: 'https://meyppi.com',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // /demo is auth-gated and noindex — keep it out of the sitemap
+      filter: (page) => !page.includes('/demo'),
+    }),
+  ],
   build: { inlineStylesheets: 'auto' },
 });

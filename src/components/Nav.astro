@@ -49,7 +49,9 @@ const isActive = (href: string) => current === href;
     position: sticky;
     top: 0;
     z-index: 50;
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--grey);
     height: var(--nav-h);
   }
@@ -79,7 +81,10 @@ const isActive = (href: string) => current === href;
   }
   .nav__menu a:not(.btn):hover,
   .nav__menu a.active {
-    color: var(--teal);
+    color: var(--teal-dark);
+  }
+  .nav__menu a.active {
+    font-weight: 600;
   }
   .nav__cta .btn {
     padding: 10px 22px;

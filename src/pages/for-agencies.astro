@@ -7,18 +7,22 @@ import Button from '../components/Button.astro';
   title="For Agencies"
   description="Independent verification for client reporting, publisher reconciliation, and makegood documentation."
 >
-  <section class="section">
+  <section class="page-head">
     <div class="container narrow">
       <span class="kicker">For agencies</span>
       <h1>Independent verification for client reporting.</h1>
-      <p class="section__lede">
+      <p class="page-head__sub">
         When your name is on the report, the evidence behind it matters.
         Meyppi gives agencies verification that stands on its own —
         independent of publisher reporting and of your own traffic sheets.
       </p>
+    </div>
+  </section>
 
-      <div class="grid grid--3" style="margin-top:40px">
-        <div class="card">
+  <section class="section">
+    <div class="container narrow">
+      <div class="grid grid--3" style="margin-top:0">
+        <div class="card reveal">
           <h3>Client defensibility</h3>
           <p>
             Present clients with placement-level verification, not
@@ -26,7 +30,7 @@ import Button from '../components/Button.astro';
             creative version, timestamps, matched duration, confidence.
           </p>
         </div>
-        <div class="card">
+        <div class="card reveal">
           <h3>Publisher reconciliation</h3>
           <p>
             When a placement is trimmed, missing, or substituted with the
@@ -34,7 +38,7 @@ import Button from '../components/Button.astro';
             in a format you can take directly to the publisher.
           </p>
         </div>
-        <div class="card">
+        <div class="card reveal">
           <h3>Makegood documentation</h3>
           <p>
             Discrepancies documented independently are discrepancies that
@@ -46,7 +50,7 @@ import Button from '../components/Button.astro';
 
       <div style="margin-top:48px">
         <Button variant="primary" href="/contact">
-          Request a Campaign Audit
+          Request a Campaign Audit <span class="arrow">→</span>
         </Button>
       </div>
     </div>
@@ -56,5 +60,24 @@ import Button from '../components/Button.astro';
 <style>
   .narrow {
     max-width: 900px;
+  }
+  .page-head {
+    background: var(--indigo-deep);
+    background-image: var(--grid-dots);
+    padding: clamp(56px, 7vw, 88px) 0;
+    color: var(--white);
+  }
+  .page-head .kicker {
+    color: var(--teal);
+  }
+  .page-head h1 {
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .page-head__sub {
+    color: #c9d3e4;
+    font-size: 1.15rem;
+    max-width: 58ch;
+    margin: 0;
   }
 </style>
