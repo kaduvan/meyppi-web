@@ -1,0 +1,288 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+
+// Data below is from a real Meyppi engine run (synthetic demo campaign,
+// clearly labeled). Same pipeline, same report format as a paid audit.
+const placements = [
+  {
+    content: 'EP-1041',
+    publisher: 'Publisher A (redacted)',
+    expected: 'CR-A v1 · 30s',
+    observed: 'CR-A v1 · 30.0s @ 00:01:30',
+    cls: 'full',
+    clsLabel: 'Detected — Full',
+    conf: '0.99',
+  },
+  {
+    content: 'EP-1042',
+    publisher: 'Publisher A (redacted)',
+    expected: 'CR-A v1 · 30s',
+    observed: 'CR-A v1 · 24.0s (tail missing 5.8s)',
+    cls: 'partial',
+    clsLabel: 'Detected — Partial',
+    conf: '0.90',
+  },
+  {
+    content: 'EP-1043',
+    publisher: 'Publisher B (redacted)',
+    expected: 'CR-A v1 · 30s',
+    observed: 'CR-A v2 aired (version substituted)',
+    cls: 'mismatch',
+    clsLabel: 'Version Mismatch',
+    conf: '0.90',
+  },
+  {
+    content: 'EP-1044',
+    publisher: 'Publisher B (redacted)',
+    expected: 'CR-A v1 · 30s',
+    observed: 'No occurrence found',
+    cls: 'notdetected',
+    clsLabel: 'Not Detected',
+    conf: '0.95',
+  },
+  {
+    content: 'EP-1045',
+    publisher: 'Publisher C (redacted)',
+    expected: 'CR-A v2 · 30s',
+    observed: 'CR-A v2 · 30.0s',
+    cls: 'full',
+    clsLabel: 'Detected — Full',
+    conf: '0.99',
+  },
+];
+
+const evidenceEvent = {
+  event_id: 'VE_CMP_XXXXX_CR-A_v1_EP-1041',
+  campaign_id: 'CMP-XXXXX',
+  creative_id: 'CR-A',
+  version_tag: 'v1',
+  source_id: 'SRC_POD-1',
+  content_id: 'EP-1041',
+  timestamp: '2026-10-07T12:00:00+00:00',
+  match_type: 'full',
+  duration_sec: 30.0,
+  evidence_tier: 2,
+  confidence: 0.99,
+  processing: {
+    engine: 'aircheck-fingerprint',
+    attributed_version: 'v1',
+    content_sha256: '9f2c…a41d (redacted)',
+  },
+  evidence: {
+    offset_sec: 90.001,
+    covered_time_sec: 30.0,
+    coverage_ratio: 1.0,
+    match_count: 3350,
+    missing_head_sec: 0.0,
+    missing_tail_sec: 0.0,
+  },
+};
+---
+
+<Base
+  title="Sample Report"
+  description="An illustrative Meyppi campaign audit report: placement-by-placement classification, evidence chain, and methodology."
+>
+  <section class="section">
+    <div class="container">
+      <div class="report-head">
+        <div>
+          <span class="kicker">Illustrative sample</span>
+          <h1>Campaign Delivery Audit</h1>
+        </div>
+        <div class="report-head__meta">
+          <p><strong>Campaign:</strong> CMP-XXXXX (redacted)</p>
+          <p><strong>Client:</strong> [Redacted]</p>
+          <p><strong>Audit period:</strong> 01–31 Oct 2026</p>
+          <p><strong>Audit date:</strong> 07 Oct 2026</p>
+        </div>
+      </div>
+
+      <p class="note">
+        This sample is generated from a real Meyppi engine run on an
+        illustrative synthetic campaign. Client, campaign, and publisher
+        identifiers are redacted. A paid audit delivers the identical report
+        format with your campaign data.
+      </p>
+
+      <!-- Summary -->
+      <div class="summary-grid">
+        <div class="summary-grid__item">
+          <span class="summary-grid__num">5</span>
+          <span class="summary-grid__label">Expected</span>
+        </div>
+        <div class="summary-grid__item">
+          <span class="summary-grid__num">2</span>
+          <span class="summary-grid__label">Verified full</span>
+        </div>
+        <div class="summary-grid__item warn">
+          <span class="summary-grid__num">1</span>
+          <span class="summary-grid__label">Partial</span>
+        </div>
+        <div class="summary-grid__item warn">
+          <span class="summary-grid__num">1</span>
+          <span class="summary-grid__label">Version mismatch</span>
+        </div>
+        <div class="summary-grid__item warn">
+          <span class="summary-grid__num">1</span>
+          <span class="summary-grid__label">Not detected</span>
+        </div>
+        <div class="summary-grid__item">
+          <span class="summary-grid__num">0</span>
+          <span class="summary-grid__label">Manual review</span>
+        </div>
+      </div>
+
+      <!-- Placement table -->
+      <h2 style="margin-top:48px">Placement detail</h2>
+      <div class="table-wrap card" style="padding:0">
+        <table>
+          <thead>
+            <tr>
+              <th>Content</th>
+              <th>Publisher</th>
+              <th>Expected</th>
+              <th>Observed</th>
+              <th>Classification</th>
+              <th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            {placements.map((p) => (
+              <tr>
+                <td class="mono">{p.content}</td>
+                <td>{p.publisher}</td>
+                <td>{p.expected}</td>
+                <td>{p.observed}</td>
+                <td>
+                  <span class={`chip chip--${p.cls}`}>{p.clsLabel}</span>
+                </td>
+                <td>{p.conf}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Evidence example -->
+      <h2 style="margin-top:48px">Evidence — one verification event</h2>
+      <p>
+        Every placement in the audit is backed by a verification event like
+        this one. Raw evidence is exported alongside the report and never
+        discarded.
+      </p>
+      <pre class="evidence"><code>{JSON.stringify(evidenceEvent, null, 2)}</code></pre>
+
+      <!-- Appendix -->
+      <h2 style="margin-top:48px">Methodology</h2>
+      <p>
+        Master creatives are fingerprinted (Wang-style constellation
+        fingerprinting) and matched against the published media with
+        temporal alignment. Reference coverage, continuity, gap analysis,
+        and alignment consistency determine each classification. Every
+        ambiguous case is classified as Insufficient Signal or Manual
+        Review Required — never silently resolved.
+      </p>
+
+      <h3>Classification definitions</h3>
+      <ul>
+        <li><strong>Detected — Full:</strong> creative verified, complete delivery.</li>
+        <li><strong>Detected — Partial:</strong> creative verified, delivery incomplete (e.g. trimmed duration).</li>
+        <li><strong>Version Mismatch:</strong> a different version of the creative aired.</li>
+        <li><strong>Not Detected:</strong> no admissible evidence the creative aired.</li>
+        <li><strong>Insufficient Signal:</strong> media quality too low for a defensible result.</li>
+        <li><strong>Manual Review Required:</strong> evidence ambiguous; reviewed by an analyst.</li>
+      </ul>
+
+      <p class="note">
+        Meyppi reports algorithmic findings from acoustic fingerprint
+        evidence. Algorithmic confidence is not legal proof.
+      </p>
+
+      <div style="margin-top:40px; display:flex; gap:16px; flex-wrap:wrap">
+        <Button variant="primary" href="/contact">
+          Request a Campaign Audit
+        </Button>
+        <button class="btn btn--secondary" data-print>
+          Download Sample PDF
+        </button>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .report-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    margin-bottom: 24px;
+  }
+  .report-head__meta p {
+    margin: 0;
+    font-size: 15px;
+  }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .summary-grid__item {
+    border: 1px solid var(--grey);
+    border-radius: var(--radius);
+    padding: 20px 16px;
+    text-align: center;
+    background: var(--white);
+  }
+  .summary-grid__item.warn {
+    border-color: #d8a63a;
+    background: #fbf3e2;
+  }
+  .summary-grid__num {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--indigo);
+  }
+  .summary-grid__label {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .evidence {
+    background: var(--indigo);
+    color: #e6ebf2;
+    padding: 24px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  @media (max-width: 900px) {
+    .summary-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media print {
+    .nav,
+    .footer,
+    .btn {
+      display: none !important;
+    }
+    body {
+      font-size: 13px;
+    }
+    .section {
+      padding: 16px 0;
+    }
+  }
+</style>
+
+<script>
+  document.querySelector('[data-print]')?.addEventListener('click', () => {
+    window.print();
+  });
+</script>

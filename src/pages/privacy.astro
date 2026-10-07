@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site';
+---
+
+<Base
+  title="Privacy Policy"
+  description="Meyppi privacy policy. No cookies, no tracking pixels, privacy-first analytics."
+>
+  <section class="section">
+    <div class="container narrow">
+      <h1>Privacy Policy</h1>
+      <p class="muted">Last updated: 1 October 2026</p>
+
+      <h2>What we collect</h2>
+      <p>
+        When you submit the audit request form we collect the details you
+        provide: name, company, role, email, campaign count range, spend
+        range, and your one-line description. We use this solely to respond
+        to your request and scope an audit.
+      </p>
+
+      <h2>Website analytics</h2>
+      <p>
+        This site uses Cloudflare Web Analytics, which aggregates page-view
+        counts without cookies and without tracking individual visitors.
+        We do not use Google Analytics or any cross-site tracking.
+      </p>
+
+      <h2>Cookies</h2>
+      <p>This site sets no cookies. There is no cookie banner because there are no cookies.</p>
+
+      <h2>Campaign material</h2>
+      <p>
+        Creative files and media you provide for an audit are processed
+        only to produce your audit, are stored with documented permission,
+        and are not shared with third parties. Every artifact carries an
+        evidence tier describing how the media was obtained.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Privacy questions: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .narrow {
+    max-width: 720px;
+  }
+  .muted {
+    color: var(--muted);
+    font-size: 14px;
+  }
+</style>

@@ -1,0 +1,299 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+---
+
+<Base
+  title="Did your podcast ad actually run as contracted?"
+  description="Meyppi independently verifies whether contracted audio and video creatives appeared in published media — when they ran, which version, and whether delivery was complete."
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div>
+        <h1>Did your podcast ad actually run as contracted?</h1>
+        <p class="hero__sub">
+          Meyppi independently verifies whether contracted audio and video
+          creatives appeared in published media — when they ran, which
+          version, and whether delivery was complete.
+        </p>
+        <div class="hero__ctas">
+          <Button variant="primary" href="/contact">
+            Request a Campaign Audit
+          </Button>
+          <Button variant="secondary" href="/sample-report">
+            See a Sample Report
+          </Button>
+        </div>
+      </div>
+      <div class="hero__mark" aria-hidden="true">
+        <img src="/logo-mark.svg" alt="" class="wave-anim" width="440" />
+      </div>
+    </div>
+  </section>
+
+  <!-- The problem -->
+  <section class="section section--alt">
+    <div class="container">
+      <span class="kicker">The problem</span>
+      <h2>Nobody independently confirms delivery.</h2>
+      <div class="grid grid--3" style="margin-top:32px">
+        <div class="card">
+          <h3>You paid for 240 placements.</h3>
+          <p>
+            Your publisher reports 240. Your spreadsheet says 240. But nobody
+            independently confirmed it.
+          </p>
+        </div>
+        <div class="card">
+          <h3>You don't know what actually aired.</h3>
+          <p>
+            Wrong version, trimmed duration, missing placements,
+            over-delivery. These are invisible in self-reported data.
+          </p>
+        </div>
+        <div class="card">
+          <h3>You can't prove it.</h3>
+          <p>
+            Without independent evidence, discrepancies can't be reconciled
+            with a publisher or defended to a client.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Meyppi does -->
+  <section class="section">
+    <div class="container">
+      <span class="kicker">What Meyppi does</span>
+      <h2>From expected delivery to defensible evidence.</h2>
+      <ol class="timeline">
+        <li>
+          <span class="timeline__num">1</span>
+          <h3>Expected delivery</h3>
+          <p>
+            You provide the campaign contract: creatives, publishers,
+            episodes, dates.
+          </p>
+        </li>
+        <li>
+          <span class="timeline__num">2</span>
+          <h3>Independently observed</h3>
+          <p>
+            We ingest the published media from permitted sources and
+            fingerprint every episode.
+          </p>
+        </li>
+        <li>
+          <span class="timeline__num">3</span>
+          <h3>Discrepancy detected</h3>
+          <p>
+            Wrong version, trimmed duration, missing placement — flagged
+            against the contract.
+          </p>
+        </li>
+        <li>
+          <span class="timeline__num">4</span>
+          <h3>Evidence produced</h3>
+          <p>
+            A placement-by-placement audit with the evidence chain behind
+            every result.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- What you get -->
+  <section class="section section--alt">
+    <div class="container">
+      <span class="kicker">What you get</span>
+      <h2>Three deliverables per audit.</h2>
+      <div class="grid grid--3" style="margin-top:32px">
+        <div class="card">
+          <h3>Verification report</h3>
+          <p>
+            Placement-by-placement status with CSV/JSON export and a PDF
+            audit report.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Evidence chain</h3>
+          <p>
+            Creative ID, version, hash, timestamp, matched duration,
+            confidence — retained for every result.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Exception review</h3>
+          <p>
+            Every ambiguous case is flagged for manual review. Nothing is
+            silently classified.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section class="section">
+    <div class="container">
+      <span class="kicker">Who it's for</span>
+      <h2>Built for media buyers.</h2>
+      <div class="grid grid--2" style="margin-top:32px">
+        <div class="card card--flat">
+          <h3>For agencies</h3>
+          <p>
+            Independent verification for client reporting and publisher
+            reconciliation.
+          </p>
+          <a href="/for-agencies">How agencies use Meyppi →</a>
+        </div>
+        <div class="card card--flat">
+          <h3>For brands</h3>
+          <p>
+            Direct visibility into whether contracted media actually ran —
+            independent of agency or publisher reporting.
+          </p>
+          <a href="/for-brands">How brands use Meyppi →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust and scope -->
+  <section class="section section--alt">
+    <div class="container">
+      <span class="kicker">Trust and scope</span>
+      <p class="section__lede">
+        Meyppi verifies pre-produced audio creatives in podcast and digital
+        audio content where the published media is independently observable.
+        We do not claim legal proof. Every result is classified as Detected,
+        Not Detected, Insufficient Signal, or Manual Review Required.
+      </p>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta-band">
+    <div class="container">
+      <h2>Give us one completed campaign.</h2>
+      <p>We'll return a discrepancy report.</p>
+      <Button variant="on-dark" href="/contact">
+        Request a Campaign Audit
+      </Button>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: 88px 0 72px;
+    background: var(--white);
+  }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero__sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 520px;
+  }
+  .hero__ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+  .hero__mark {
+    display: flex;
+    justify-content: center;
+  }
+  .hero__mark img {
+    width: min(440px, 100%);
+    height: auto;
+  }
+
+  .timeline {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 0;
+    margin: 40px 0 0;
+    counter-reset: step;
+  }
+  .timeline li {
+    border-top: 3px solid var(--grey);
+    padding-top: 18px;
+    position: relative;
+  }
+  .timeline li:nth-child(2) {
+    border-top-color: var(--teal);
+  }
+  .timeline__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--indigo);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .timeline h3 {
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+  .timeline p {
+    font-size: 15px;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .cta-band {
+    background: var(--indigo);
+    color: var(--white);
+    text-align: center;
+    padding: 64px 0;
+  }
+  .cta-band h2 {
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .cta-band p {
+    color: #d8dde5;
+    font-size: 1.15rem;
+    margin-bottom: 28px;
+  }
+
+  @media (max-width: 900px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+    }
+    .hero__mark {
+      order: -1;
+    }
+    .hero__mark img {
+      width: 240px;
+    }
+    .timeline {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .hero {
+      padding: 48px 0;
+    }
+    .timeline {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,16 @@
+{
+  "name": "meyppi-web",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Meyppi — independent media delivery verification. Marketing site (static, Astro).",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/make-icons.mjs && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.0",
+    "astro": "^5.0.0"
+  }
+}

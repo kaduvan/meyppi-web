@@ -1,0 +1,147 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+
+const steps = [
+  {
+    n: 1,
+    title: 'You send us one campaign',
+    body: 'Master creatives, expected publishers, expected episodes, and campaign dates. One completed campaign is all we need to start.',
+    icon: 'M4 4h16v12H4z M8 20h8',
+  },
+  {
+    n: 2,
+    title: 'We ingest the published media',
+    body: 'RSS feeds, authorized sources, and customer-provided recordings. Every item is hashed and logged before processing.',
+    icon: 'M4 12h6l2-5 4 10 2-5h2',
+  },
+  {
+    n: 3,
+    title: 'We fingerprint and match',
+    body: 'Wang-style constellation fingerprinting with temporal alignment. Every match retains its raw evidence.',
+    icon: 'M4 12h3l2-6 3 12 2-6h6',
+  },
+  {
+    n: 4,
+    title: 'We classify every placement',
+    body: 'Detected, Not Detected, Insufficient Signal, or Manual Review Required. Ambiguous cases are never silently resolved.',
+    icon: 'M5 4h14v16H5z M9 10l2 2 4-4',
+  },
+  {
+    n: 5,
+    title: 'You receive the report',
+    body: 'A placement-by-placement audit with CSV/JSON export and a PDF report with full evidence references.',
+    icon: 'M6 4h12v16H6z M9 9h6 M9 13h6 M9 17h4',
+  },
+];
+---
+
+<Base
+  title="How It Works"
+  description="Five steps from one completed campaign to a placement-by-placement discrepancy report with full evidence chain."
+>
+  <section class="section">
+    <div class="container narrow">
+      <span class="kicker">Process</span>
+      <h1>How a Meyppi audit works.</h1>
+      <p class="section__lede">
+        One campaign in. One discrepancy report out. Every step produces
+        evidence you can hand to a publisher or a client.
+      </p>
+
+      <ol class="steps">
+        {steps.map((step) => (
+          <li>
+            <span class="steps__num">{step.n}</span>
+            <div>
+              <h2>
+                <svg
+                  class="steps__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#1B2A4A"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d={step.icon} />
+                </svg>
+                {step.title}
+              </h2>
+              <p>{step.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <div style="margin-top:48px; display:flex; gap:16px; flex-wrap:wrap">
+        <Button variant="primary" href="/contact">
+          Request a Campaign Audit
+        </Button>
+        <Button variant="secondary" href="/sample-report">
+          See a Sample Report
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container narrow">
+      <h2>Scope</h2>
+      <p class="note">
+        V1 covers pre-produced audio creatives in podcast and digital audio
+        content. Dynamic ad insertion, host-read verification, and video
+        sources are planned for later stages.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .narrow {
+    max-width: 760px;
+  }
+  .steps {
+    list-style: none;
+    margin: 40px 0 0;
+    padding: 0;
+  }
+  .steps li {
+    display: flex;
+    gap: 20px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--grey);
+  }
+  .steps li:last-child {
+    border-bottom: none;
+  }
+  .steps__num {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--indigo);
+    color: var(--white);
+    font-weight: 600;
+  }
+  .steps h2 {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .steps__icon {
+    width: 22px;
+    height: 22px;
+    flex: none;
+  }
+  .steps p {
+    color: var(--muted);
+    margin: 0;
+  }
+</style>

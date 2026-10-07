@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Meyppi">
+  <!-- Icon-only mark (favicon / app icon): 5-bar waveform, teal center. -->
+  <rect x="1"  y="12" width="4" height="8"  rx="2" fill="#1B2A4A"/>
+  <rect x="7"  y="9"  width="4" height="14" rx="2" fill="#1B2A4A"/>
+  <rect x="13" y="5"  width="6" height="22" rx="3" fill="#0FA3A3"/>
+  <rect x="21" y="9"  width="4" height="14" rx="2" fill="#1B2A4A"/>
+  <rect x="27" y="12" width="4" height="8"  rx="2" fill="#1B2A4A"/>
+</svg>

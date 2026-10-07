@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+---
+
+<Base
+  title="For Brands"
+  description="Direct visibility into whether contracted media actually ran — independent of agency or publisher reporting."
+>
+  <section class="section">
+    <div class="container narrow">
+      <span class="kicker">For brands</span>
+      <h1>Know what actually ran.</h1>
+      <p class="section__lede">
+        You approve the plan and you see the invoice. What runs in between
+        is reported to you by the same people who sold it. Meyppi closes
+        that gap with independent verification.
+      </p>
+
+      <div class="grid grid--3" style="margin-top:40px">
+        <div class="card">
+          <h3>Budget accountability</h3>
+          <p>
+            Verify that the placements you paid for actually aired —
+            complete, in the right version, on the contracted episodes.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Independent of everyone</h3>
+          <p>
+            Meyppi is neither your agency nor your publisher. Verification
+            starts from the published media itself, not from anyone's
+            report.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Evidence, not assurances</h3>
+          <p>
+            Every placement comes back classified — Detected, Not Detected,
+            Insufficient Signal, or Manual Review Required — with the
+            evidence behind the result.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top:48px">
+        <Button variant="primary" href="/contact">
+          Request a Campaign Audit
+        </Button>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .narrow {
+    max-width: 900px;
+  }
+</style>

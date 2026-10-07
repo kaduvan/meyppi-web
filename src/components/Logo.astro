@@ -1,0 +1,47 @@
+---
+/** Meyppi logo lockups: horizontal (mark + wordmark), stacked, icon-only. */
+const { variant = 'horizontal', width = 120, animated = false } = Astro.props;
+---
+
+{
+  variant === 'icon' ? (
+    <img src="/favicon.svg" alt="Meyppi" width={width} height={width} />
+  ) : variant === 'stacked' ? (
+    <span class="logo logo--stacked">
+      <img src="/logo-mark.svg" alt="" width={width} height={(width / 118) * 40} />
+      <span class="logo__word">MEYPPI</span>
+    </span>
+  ) : (
+    <span class="logo">
+      <img
+        src="/logo-mark.svg"
+        alt=""
+        class={animated ? 'wave-anim' : ''}
+        width={width}
+        height={(width / 118) * 40}
+      />
+      <span class="logo__word">MEYPPI</span>
+    </span>
+  )
+}
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .logo--stacked {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .logo__word {
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.05em;
+    color: var(--indigo);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+</style>

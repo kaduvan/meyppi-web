@@ -1,0 +1,155 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+
+const faqs = [
+  {
+    q: 'What counts as a campaign?',
+    a: 'One contracted media buy with a defined flight period: a set of creatives, publishers, and expected placements. A typical audit covers up to 5 creatives across up to 20 publishers and 40 episodes.',
+  },
+  {
+    q: 'What do you need from us?',
+    a: 'The master creative files (every version that was contracted), the placement plan or insertion order, and access to the published media — RSS feeds, authorized downloads, or recordings you already hold.',
+  },
+  {
+    q: 'What if a placement is ambiguous?',
+    a: 'It is classified as Insufficient Signal or Manual Review Required, never silently resolved. Every ambiguous case appears in the report with the reason it could not be automatically classified.',
+  },
+  {
+    q: 'Do you verify dynamic ad insertion?',
+    a: 'Not in V1. We verify pre-produced audio creatives in podcast and digital audio content where the published media is independently observable. DAI verification is planned for a later stage.',
+  },
+  {
+    q: 'Is this legal proof?',
+    a: 'No. Meyppi produces evidence — verification results with confidence levels and a documented methodology. We never describe algorithmic confidence as legal proof.',
+  },
+  {
+    q: 'How long does an audit take?',
+    a: 'A typical single-campaign audit completes within 5 to 10 working days of receiving the creatives and media access, depending on the number of episodes and sources.',
+  },
+];
+---
+
+<Base
+  title="Pricing"
+  description="Fixed-fee campaign audits from ₹15,000. No annual contracts, no hidden usage charges."
+>
+  <section class="section">
+    <div class="container">
+      <span class="kicker">Pricing</span>
+      <h1>Fixed fee. Per campaign.</h1>
+      <p class="section__lede">
+        Every audit is a fixed fee. No annual contracts. No hidden usage
+        charges in V1.
+      </p>
+
+      <div class="grid grid--2 pricing-grid">
+        <div class="card plan">
+          <span class="kicker">Campaign Audit — V1</span>
+          <div class="plan__price">₹15,000–₹25,000</div>
+          <p class="plan__per">per campaign, fixed fee</p>
+          <ul class="plan__list">
+            <li>Up to 5 creatives</li>
+            <li>Up to 20 publishers</li>
+            <li>Up to 40 episodes</li>
+            <li>Historical lookback</li>
+            <li>Placement-by-placement dashboard</li>
+            <li>CSV/JSON export</li>
+            <li>PDF audit report</li>
+          </ul>
+          <p class="plan__note">
+            Price scales with number of creatives, publishers, episodes, and
+            lookback period.
+          </p>
+          <Button variant="primary" href="/contact">
+            Request a Campaign Audit
+          </Button>
+        </div>
+
+        <div class="card plan plan--muted">
+          <span class="kicker">Continuous Monitoring — V2</span>
+          <div class="plan__price">Contact us</div>
+          <p class="plan__per">waitlist, per-organization</p>
+          <ul class="plan__list">
+            <li>Continuous campaign monitoring</li>
+            <li>Automated discrepancy alerts</li>
+            <li>Reconciliation dashboard</li>
+            <li>API access</li>
+          </ul>
+          <p class="plan__note">
+            V2 is in development. Join the waitlist and we will contact you
+            when it is available.
+          </p>
+          <Button variant="secondary" href="/contact">
+            Join the Waitlist
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container narrow">
+      <h2>Frequently asked questions</h2>
+      {faqs.map((faq) => (
+        <details class="faq">
+          <summary>{faq.q}</summary>
+          <div class="faq__body">{faq.a}</div>
+        </details>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .narrow {
+    max-width: 760px;
+  }
+  .pricing-grid {
+    margin-top: 40px;
+    align-items: stretch;
+  }
+  .plan {
+    display: flex;
+    flex-direction: column;
+  }
+  .plan__price {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--indigo);
+    letter-spacing: -0.02em;
+  }
+  .plan__per {
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .plan__list {
+    list-style: none;
+    margin: 0 0 18px;
+    padding: 0;
+    flex: 1;
+  }
+  .plan__list li {
+    padding: 8px 0 8px 24px;
+    border-bottom: 1px solid var(--grey);
+    position: relative;
+  }
+  .plan__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--teal);
+  }
+  .plan__note {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .plan--muted {
+    background: var(--off-white);
+  }
+</style>

@@ -1,0 +1,146 @@
+---
+import Logo from './Logo.astro';
+import { NAV_LINKS, PRIMARY_CTA } from '../lib/site';
+
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => current === href;
+---
+
+<header class="nav">
+  <div class="container nav__inner">
+    <a href="/" class="nav__brand" aria-label="Meyppi home">
+      <Logo width={110} />
+    </a>
+
+    <button
+      class="nav__toggle"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+      aria-label="Open menu"
+    >
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="nav-menu" class="nav__menu" aria-label="Main">
+      <ul>
+        {NAV_LINKS.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={{ active: isActive(link.href) }}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+        <li class="nav__cta">
+          <a class="btn btn--primary" href={PRIMARY_CTA.href}>
+            {PRIMARY_CTA.label}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--white);
+    border-bottom: 1px solid var(--grey);
+    height: var(--nav-h);
+  }
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: 24px;
+  }
+  .nav__brand {
+    text-decoration: none;
+  }
+  .nav__menu ul {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav__menu a:not(.btn) {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--indigo);
+  }
+  .nav__menu a:not(.btn):hover,
+  .nav__menu a.active {
+    color: var(--teal);
+  }
+  .nav__cta .btn {
+    padding: 10px 22px;
+  }
+
+  .nav__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .nav__toggle span {
+    width: 22px;
+    height: 2px;
+    background: var(--indigo);
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    .nav {
+      height: var(--nav-h-mobile);
+    }
+    .nav__toggle {
+      display: flex;
+    }
+    .nav__menu {
+      position: fixed;
+      top: var(--nav-h-mobile);
+      left: 0;
+      right: 0;
+      bottom: 100%;
+      background: var(--white);
+      border-bottom: 1px solid var(--grey);
+      overflow: hidden;
+      transition: bottom 200ms ease;
+      z-index: 49;
+    }
+    .nav__menu.open {
+      bottom: 0;
+    }
+    .nav__menu ul {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 24px;
+      gap: 18px;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('.nav__toggle');
+  const menu = document.getElementById('nav-menu');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(Boolean(open)));
+    toggle.setAttribute(
+      'aria-label',
+      open ? 'Close menu' : 'Open menu',
+    );
+  });
+</script>

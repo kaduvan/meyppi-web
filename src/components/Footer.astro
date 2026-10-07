@@ -1,0 +1,123 @@
+---
+/** Footer per brief §4: dark indigo, 4 columns, மெய் watermark. */
+const year = new Date().getFullYear();
+
+const columns = [
+  {
+    heading: 'Company',
+    links: [
+      { href: '/about', label: 'About' },
+      { href: '/contact', label: 'Contact' },
+    ],
+  },
+  {
+    heading: 'Product',
+    links: [
+      { href: '/how-it-works', label: 'How It Works' },
+      { href: '/pricing', label: 'Pricing' },
+      { href: '/sample-report', label: 'Sample Report' },
+    ],
+  },
+  {
+    heading: 'Use Cases',
+    links: [
+      { href: '/for-agencies', label: 'For Agencies' },
+      { href: '/for-brands', label: 'For Brands' },
+    ],
+  },
+  {
+    heading: 'Legal',
+    links: [
+      { href: '/privacy', label: 'Privacy' },
+      { href: '/terms', label: 'Terms' },
+    ],
+  },
+];
+---
+
+<footer class="footer">
+  <span class="footer__watermark" aria-hidden="true">மெய்</span>
+  <div class="container">
+    <div class="footer__grid">
+      {columns.map((col) => (
+        <div>
+          <h3>{col.heading}</h3>
+          <ul>
+            {col.links.map((link) => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div class="footer__bottom">
+      © {year} Meyppi. Independent media delivery verification.
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--indigo);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    padding: 56px 0 28px;
+  }
+  .footer__watermark {
+    position: absolute;
+    right: 32px;
+    bottom: -30px;
+    font-size: 200px;
+    line-height: 1;
+    color: var(--teal);
+    opacity: 0.2;
+    pointer-events: none;
+    user-select: none;
+  }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    position: relative;
+  }
+  .footer h3 {
+    color: var(--white);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .footer li {
+    margin-bottom: 10px;
+  }
+  .footer a {
+    color: #d8dde5;
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .footer a:hover {
+    color: var(--teal);
+  }
+  .footer__bottom {
+    border-top: 1px solid rgba(216, 221, 229, 0.25);
+    margin-top: 40px;
+    padding-top: 20px;
+    font-size: 13px;
+    color: #d8dde5;
+  }
+  @media (max-width: 640px) {
+    .footer__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .footer__watermark {
+      font-size: 130px;
+    }
+  }
+</style>

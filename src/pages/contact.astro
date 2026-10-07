@@ -1,0 +1,168 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site';
+
+const configured = Boolean(SITE.formEndpoint);
+---
+
+<Base
+  title="Request a Campaign Audit"
+  description="Request an independent campaign delivery audit. Paid service, fixed fee, response within one working day."
+>
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <span class="kicker">Request an audit</span>
+          <h1>Request a Campaign Audit</h1>
+          <p class="section__lede">
+            Tell us what you want verified. We will reply within one
+            working day with scope, price, and what we need from you.
+          </p>
+
+          {
+            configured ? (
+              <form
+                class="form"
+                method="POST"
+                action={SITE.formEndpoint}
+              >
+                <label>
+                  Name
+                  <input type="text" name="name" required autocomplete="name" />
+                </label>
+                <label>
+                  Company
+                  <input type="text" name="company" required autocomplete="organization" />
+                </label>
+                <label>
+                  Role
+                  <input type="text" name="role" required autocomplete="organization-title" />
+                </label>
+                <label>
+                  Email
+                  <input type="email" name="email" required autocomplete="email" />
+                </label>
+                <label>
+                  Number of active campaigns
+                  <select name="campaigns" required>
+                    <option value="">Select…</option>
+                    <option>1</option>
+                    <option>2–5</option>
+                    <option>6–20</option>
+                    <option>More than 20</option>
+                  </select>
+                </label>
+                <label>
+                  Approximate annual audio/podcast media spend
+                  <select name="spend" required>
+                    <option value="">Select…</option>
+                    <option>Under ₹10 lakh</option>
+                    <option>₹10 lakh – ₹50 lakh</option>
+                    <option>₹50 lakh – ₹2 crore</option>
+                    <option>Above ₹2 crore</option>
+                  </select>
+                </label>
+                <label>
+                  What do you want verified? (one line)
+                  <textarea
+                    name="description"
+                    rows="3"
+                    required
+                    placeholder="e.g. One podcast campaign, 3 creatives, 8 publishers, October flight"></textarea>
+                </label>
+                <button class="btn btn--primary" type="submit">
+                  Request a Campaign Audit
+                </button>
+              </form>
+            ) : (
+              <div class="card" style="margin-top:24px">
+                <h3>Form temporarily unavailable</h3>
+                <p>
+                  The request form is not yet connected. Email us directly
+                  and we will respond within one working day:
+                </p>
+                <p>
+                  <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
+                </p>
+              </div>
+            )
+          }
+        </div>
+
+        <aside class="contact-side">
+          <div class="card card--flat">
+            <h3>Direct contact</h3>
+            <p>
+              <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
+            </p>
+          </div>
+          <div class="card card--flat">
+            <h3>Response time</h3>
+            <p>Within one working day.</p>
+          </div>
+          <div class="card card--flat">
+            <h3>Paid service</h3>
+            <p>
+              Campaign audits are a paid, fixed-fee service
+              (₹15,000–₹25,000 per campaign).
+              <a href="/pricing"> See pricing.</a>
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .form {
+    display: grid;
+    gap: 18px;
+    margin-top: 24px;
+  }
+  .form label {
+    display: grid;
+    gap: 6px;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--indigo);
+  }
+  .form input,
+  .form select,
+  .form textarea {
+    font-family: var(--font);
+    font-size: 16px;
+    padding: 12px 14px;
+    border: 1px solid var(--grey);
+    border-radius: var(--radius);
+    background: var(--white);
+    color: var(--body);
+  }
+  .form input:focus,
+  .form select:focus,
+  .form textarea:focus {
+    outline: 3px solid var(--teal);
+    outline-offset: 0;
+    border-color: var(--teal);
+  }
+  .contact-side {
+    display: grid;
+    gap: 16px;
+  }
+  .contact-side p {
+    margin: 0;
+    font-size: 15px;
+  }
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

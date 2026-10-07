@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+---
+
+<Base
+  title="For Agencies"
+  description="Independent verification for client reporting, publisher reconciliation, and makegood documentation."
+>
+  <section class="section">
+    <div class="container narrow">
+      <span class="kicker">For agencies</span>
+      <h1>Independent verification for client reporting.</h1>
+      <p class="section__lede">
+        When your name is on the report, the evidence behind it matters.
+        Meyppi gives agencies verification that stands on its own —
+        independent of publisher reporting and of your own traffic sheets.
+      </p>
+
+      <div class="grid grid--3" style="margin-top:40px">
+        <div class="card">
+          <h3>Client defensibility</h3>
+          <p>
+            Present clients with placement-level verification, not
+            self-reported numbers. Every result carries its evidence chain:
+            creative version, timestamps, matched duration, confidence.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Publisher reconciliation</h3>
+          <p>
+            When a placement is trimmed, missing, or substituted with the
+            wrong version, you get the discrepancy with evidence attached —
+            in a format you can take directly to the publisher.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Makegood documentation</h3>
+          <p>
+            Discrepancies documented independently are discrepancies that
+            get resolved. Meyppi reports give you the record to support
+            makegood requests and corrections.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top:48px">
+        <Button variant="primary" href="/contact">
+          Request a Campaign Audit
+        </Button>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .narrow {
+    max-width: 900px;
+  }
+</style>
