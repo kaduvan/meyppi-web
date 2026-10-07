@@ -214,7 +214,7 @@ a:hover {
   background: #f9ecec;
 }
 .chip--notdetected {
-  color: var(--muted);
+  color: #4b5563; /* muted (#6B7280) is 4.35:1 on off-white, under WCAG AA */
   background: var(--off-white);
 }
 .chip--review {
@@ -238,7 +238,7 @@ th {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--muted);
+  color: #4b5563;
   font-weight: 600;
   padding: 10px 12px;
   border-bottom: 2px solid var(--grey);
