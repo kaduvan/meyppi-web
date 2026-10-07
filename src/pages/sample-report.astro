@@ -18,7 +18,7 @@ const placements = [
     content: 'EP-1042',
     publisher: 'Publisher A (redacted)',
     expected: 'CR-A v1 · 30s',
-    observed: 'CR-A v1 · 24.0s (tail missing 5.8s)',
+    observed: 'CR-A v1 · 24.2s (tail missing 5.75s)',
     cls: 'partial',
     clsLabel: 'Detected — Partial',
     conf: '0.90',
@@ -65,7 +65,7 @@ const evidenceEvent = {
   evidence_tier: 2,
   confidence: 0.99,
   processing: {
-    engine: 'aircheck-fingerprint',
+    engine: 'meyppi-fingerprint 1.0',
     attributed_version: 'v1',
     content_sha256: '9f2c…a41d (redacted)',
   },
@@ -94,8 +94,8 @@ const evidenceEvent = {
         <div class="report-head__meta">
           <p><strong>Campaign:</strong> CMP-XXXXX (redacted)</p>
           <p><strong>Client:</strong> [Redacted]</p>
-          <p><strong>Audit period:</strong> 01–31 Oct 2026</p>
-          <p><strong>Audit date:</strong> 07 Oct 2026</p>
+          <p><strong>Audit period:</strong> 01–30 Sep 2026</p>
+          <p><strong>Report issued:</strong> 7 Oct 2026</p>
         </div>
       </div>
 
@@ -103,7 +103,9 @@ const evidenceEvent = {
         This sample was produced by the real Meyppi pipeline on an
         illustrative synthetic campaign, so every number below is a genuine
         engine output, including the partial detection and the version
-        mismatch. Client, campaign and publisher identifiers are redacted.
+        mismatch. The scenario was run with a fixed clock for
+        reproducibility, which is why event timestamps are round; the
+        confidence values are the classifier's policy constants. Client, campaign and publisher identifiers are redacted.
         A paid audit delivers this exact format with your campaign's data.
       </p>
 
@@ -115,7 +117,7 @@ const evidenceEvent = {
         </div>
         <div class="summary-grid__item">
           <span class="summary-grid__num">2</span>
-          <span class="summary-grid__label">Verified full</span>
+          <span class="summary-grid__label">Detected — Full</span>
         </div>
         <div class="summary-grid__item warn">
           <span class="summary-grid__num">1</span>
@@ -123,11 +125,11 @@ const evidenceEvent = {
         </div>
         <div class="summary-grid__item warn">
           <span class="summary-grid__num">1</span>
-          <span class="summary-grid__label">Version mismatch</span>
+          <span class="summary-grid__label">Version Mismatch</span>
         </div>
         <div class="summary-grid__item warn">
           <span class="summary-grid__num">1</span>
-          <span class="summary-grid__label">Not detected</span>
+          <span class="summary-grid__label">Not Detected</span>
         </div>
         <div class="summary-grid__item">
           <span class="summary-grid__num">0</span>
@@ -205,10 +207,10 @@ const evidenceEvent = {
 
       <h3>Classification definitions</h3>
       <ul>
-        <li><strong>Detected — Full:</strong> creative verified, complete delivery.</li>
-        <li><strong>Detected — Partial:</strong> creative verified, delivery incomplete (e.g. trimmed duration).</li>
+        <li><strong>Detected — Full:</strong> the creative aired, complete delivery.</li>
+        <li><strong>Detected — Partial:</strong> the creative aired, delivery incomplete (e.g. trimmed duration).</li>
         <li><strong>Version Mismatch:</strong> a different version of the creative aired.</li>
-        <li><strong>Not Detected:</strong> no admissible evidence the creative aired.</li>
+        <li><strong>Not Detected:</strong> no matching evidence found in the published episode.</li>
         <li><strong>Insufficient Signal:</strong> media quality too low for a defensible result.</li>
         <li><strong>Manual Review Required:</strong> evidence ambiguous; reviewed by an analyst.</li>
       </ul>
@@ -223,7 +225,7 @@ const evidenceEvent = {
           Request a Campaign Audit
         </Button>
         <button class="btn btn--secondary" data-print>
-          Download Sample PDF
+          Print / Save as PDF
         </button>
       </div>
     </div>

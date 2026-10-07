@@ -9,13 +9,13 @@ import Button from '../components/Button.astro';
 >
   <section class="fc-head">
     <div class="container">
-      <span class="kicker">Free check · one per visitor</span>
-      <h1>Did your ad run in that episode?</h1>
+      <span class="kicker">Free · one check</span>
+      <h1>Check one placement, free.</h1>
       <p class="fc-head__sub">
-        Give us the creative file and the URL of a published episode. The
-        same fingerprint matching behind Meyppi audits runs right here in
-        your browser: nothing is uploaded, no account, no cost. One check,
-        honest classification, evidence attached.
+        Upload the creative file and paste the URL of the published
+        episode. Matching runs in your browser with the same
+        fingerprinting as a full audit. No account needed, and the check
+        works best in a desktop browser.
       </p>
     </div>
   </section>
@@ -56,9 +56,9 @@ import Button from '../components/Button.astro';
         <div class="fc__field">
           <label class="fc__label" for="fc-episode">Published episode URL</label>
           <p class="fc__hint">
-            A direct audio link (MP3/M4A) or the podcast's RSS feed, we take
-            its latest episode. Right-click the episode's download button and
-            copy the link.
+            A direct audio link (MP3/M4A) or the podcast's RSS feed (we
+            check its latest episode; for an older episode, paste that
+            episode's direct download link).
           </p>
           <input type="url" id="fc-episode" placeholder="https://feeds.example.com/show.mp3" />
         </div>
@@ -66,9 +66,11 @@ import Button from '../components/Button.astro';
         <div class="fc__actions">
           <button type="submit" class="btn btn--primary" id="fc-run">Run the free check</button>
           <p class="fc__privacy">
-            Runs entirely in your browser. Your creative file never leaves
-            your device; the episode is fetched from its public URL and is
-            not stored anywhere.
+            Matching runs in your browser. Uploaded files never leave your
+            device. URLs are fetched through a streaming proxy that stores
+            nothing; only standard edge-server logs remain. The one-check
+            limit is a setting in your browser's local storage, no cookies
+            or fingerprinting.
           </p>
         </div>
       </form>
@@ -108,13 +110,13 @@ import Button from '../components/Button.astro';
         </div>
 
         <p class="fc__disclaimer">
-          Free-check results are algorithmic findings from acoustic
-          fingerprint evidence, computed in your browser with the same
-          parameters as the Meyppi audit engine (validated on synthetic
-          corpora; real-world performance not yet established). This is
+          Free-check results are indicative, computed in your browser
+          with the same fingerprint parameters as Meyppi audits (engine
+          calibration validated on synthetic corpora). A paid audit adds
+          analyst review of every ambiguous placement. Results are
           evidence, not legal proof. A finding of Not Detected on
           dynamically inserted advertising can mean the ad was stitched per
-          listener and is not present in the public feed.
+          listener and is absent from the public feed.
         </p>
       </div>
 
@@ -228,7 +230,8 @@ import Button from '../components/Button.astro';
   const resultBox = document.getElementById('fc-result');
 
   const LS_KEY = 'meyppi_free_check_done';
-  const devBypass = new URLSearchParams(location.search).has('dev');
+  // dev bypass only on localhost builds (audit: no public dev flags)
+  const devBypass = ['localhost', '127.0.0.1'].includes(location.hostname);
 
   if (localStorage.getItem(LS_KEY) && !devBypass) {
     form.hidden = true;
@@ -419,12 +422,12 @@ import Button from '../components/Button.astro';
 
   /* ---- result rendering ---- */
 
-  const CHIP: Record<string, [string, string]> = {
-    full: ['chip--full', 'Detected — Full'],
-    partial: ['chip--partial', 'Detected — Partial'],
-    not_detected: ['chip--notdetected', 'Not Detected'],
-    insufficient_signal: ['chip--review', 'Insufficient Signal'],
-    manual_review: ['chip--review', 'Manual Review Required'],
+  const CHIP: Record<string, [string, string, string]> = {
+    full: ['chip--full', 'Detected — Full', 'The creative aired in this episode, complete.'],
+    partial: ['chip--partial', 'Detected — Partial', 'The creative aired, but part of its contracted runtime is missing.'],
+    not_detected: ['chip--notdetected', 'Not Detected', 'No matching evidence found in the published episode.'],
+    insufficient_signal: ['chip--review', 'Insufficient Signal', 'The evidence is too weak for a defensible result.'],
+    manual_review: ['chip--review', 'Manual Review Required', 'The evidence is ambiguous and needs an analyst.'],
   };
 
   const fmtTime = (s: number) => {
@@ -433,11 +436,12 @@ import Button from '../components/Button.astro';
   };
 
   function showResult(r: any, episodeSec: number, epTitle?: string) {
-    const [chipCls, chipLabel] = CHIP[r.match_type] ?? ['chip--review', r.match_type];
+    const [chipCls, chipLabel, chipDef] = CHIP[r.match_type] ?? ['chip--review', r.match_type, ''];
     const chip = document.getElementById('fc-result-chip');
     chip.className = `chip ${chipCls}`;
     chip.textContent = chipLabel;
-    document.getElementById('fc-result-rationale').textContent = r.rationale + '.';
+    document.getElementById('fc-result-rationale').textContent =
+      `${chipDef} ${r.rationale}.`;
 
     // timeline SVG
     const tl = document.getElementById('fc-result-timeline');

@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Security & Data Handling"
+  description="Where Meyppi stores client material, who can access it, sub-processors, retention and deletion, and exactly what the free check sends."
+>
+  <section class="page-head">
+    <div class="container narrow">
+      <span class="kicker">Security & data handling</span>
+      <h1>Where your campaign material goes.</h1>
+      <p class="page-head__sub">
+        What is stored where, who can access it, for how long, and what
+        the free check does and does not send. Written to be forwarded to
+        your IT or data-protection reviewer as-is.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow prose">
+
+      <!-- FOUNDER TODO: replace bracketed items once decided (storage
+           provider/region, retention periods) and keep this page current. -->
+      <h2>Processing</h2>
+      <p>
+        Paid audits are processed on infrastructure controlled by Meyppi,
+        on machines that are not shared with any other customer's work.
+        Client material is processed only to produce the contracted report,
+        on the client's instructions, under the Service Terms.
+      </p>
+
+      <h2>Storage and access</h2>
+      <ul>
+        <li>Creative files, media and evidence are stored encrypted at rest and in transit.</li>
+        <li>Access is limited to the personnel producing your report.</li>
+        <li>Every media file is hashed and its source recorded when it enters an audit; provenance is part of the evidence.</li>
+        <!-- FOUNDER TODO: storage provider and region. -->
+        <li>Storage location and provider available on request.</li>
+      </ul>
+
+      <h2>Retention and deletion</h2>
+      <p>
+        Form submissions are kept only as long as needed to respond and
+        scope the request. Audit material, creatives, media and evidence
+        exports, is retained so findings can be re-examined, and is
+        deleted on written request with confirmation. Retention periods
+        per engagement are stated in the engagement letter.
+      </p>
+
+      <h2>Sub-processors</h2>
+      <ul>
+        <li><strong>Cloudflare</strong> (website hosting, edge proxy for the free check, optional cookieless analytics). United States and edge locations.</li>
+        <li><strong>Formspree</strong> (audit request form handling), when the form is used.</li>
+        <li><strong>Google Fonts</strong> (website typeface delivery).</li>
+      </ul>
+      <p>
+        No client campaign material is shared with any third party. The
+        list is updated when a sub-processor changes.
+      </p>
+
+      <h2>The free check</h2>
+      <ul>
+        <li>Fingerprint matching runs in your browser. Uploaded creative files are decoded in your browser's memory and never leave your device.</li>
+        <li>Audio URLs you paste are fetched through a streaming proxy on our hosting so that browsers can read cross-origin media. The proxy stores nothing and writes no database record; only standard edge-server request logs remain.</li>
+        <li>The one-check limit is stored in your browser's local storage. The site sets no cookies and runs no visitor fingerprinting.</li>
+      </ul>
+
+      <h2>Security commitments</h2>
+      <ul>
+        <li>Access to client material is on a per-engagement basis and revoked after delivery.</li>
+        <li>If a security incident affects client material, affected clients are notified promptly with what happened and what was done.</li>
+        <li>Questions or reports: <a href="mailto:hello@meyppi.com">hello@meyppi.com</a>.</li>
+      </ul>
+
+    </div>
+  </section>
+</Base>
+
+<style>
+  .narrow {
+    max-width: 780px;
+  }
+  .page-head {
+    background: var(--indigo-deep);
+    background-image: var(--grid-dots);
+    padding: clamp(56px, 7vw, 88px) 0;
+    color: var(--white);
+  }
+  .page-head .kicker {
+    color: var(--teal);
+  }
+  .page-head h1 {
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .page-head__sub {
+    color: #c9d3e4;
+    font-size: 1.15rem;
+    max-width: 60ch;
+    margin: 0;
+  }
+</style>

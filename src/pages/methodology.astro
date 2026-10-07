@@ -1,0 +1,146 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Methodology"
+  description="How Meyppi classifies delivery: what each verdict means, which measurements drive classification, the evidence fields delivered, and how any finding can be re-checked."
+>
+  <section class="page-head">
+    <div class="container narrow">
+      <span class="kicker">Methodology</span>
+      <h1>What the measurements mean, and what we claim.</h1>
+      <p class="page-head__sub">
+        This page describes what Meyppi measures, how each verdict follows
+        from the evidence, and how you can re-check any finding. Calibration
+        parameters and scoring thresholds stay private; everything that
+        appears in a report is defined below.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow prose">
+
+      <h2>The six verdicts</h2>
+      <p>
+        Every expected placement receives exactly one verdict. The
+        vocabulary is fixed across every report, export and page on this
+        site.
+      </p>
+      <ul>
+        <li><strong>Detected — Full.</strong> The creative aired in the published episode and the evidence covers its complete contracted runtime.</li>
+        <li><strong>Detected — Partial.</strong> The creative aired, but a measurable part of its runtime is missing (for example, a trimmed tail).</li>
+        <li><strong>Version Mismatch.</strong> A version of the creative aired, but the evidence attributes it to a different contracted version than the one expected for that placement.</li>
+        <li><strong>Not Detected.</strong> No matching evidence found in the published episode.</li>
+        <li><strong>Insufficient Signal.</strong> The published media's quality is too low, or the evidence too sparse, for a defensible result either way.</li>
+        <li><strong>Manual Review Required.</strong> The evidence is ambiguous between explanations (for example, additive noise versus a cut); an analyst examines it and the report states what was found.</li>
+      </ul>
+
+      <h2>How a verdict is reached</h2>
+      <p>
+        Creatives and published episodes are fingerprinted: each file is
+        reduced to a constellation of spectral landmark pairs that survives
+        compression, loudness processing and background noise. A true
+        occurrence of a creative inside an episode appears as thousands of
+        landmark pairs agreeing on one consistent time offset; interference,
+        cross-talk and music beds do not produce that signature.
+      </p>
+      <p>
+        From the agreed matches, the engine reconstructs the creative's
+        timeline inside the episode and measures four things: how much of
+        the creative's runtime the matches cover, whether the start or the
+        end is missing and by how much, whether there are gaps in the
+        middle, and, when several versions of a creative exist, which
+        version's evidence outranks the others. Structural findings are
+        judged against the creative's own self-match profile, so a
+        naturally quiet creative is never mistaken for a partially
+        delivered one.
+      </p>
+      <p>
+        Verdicts follow from these measurements by fixed policy, calibrated
+        once on labelled corpora. Ambiguous evidence routes to Manual
+        Review Required rather than to an unsupported accusation, and the
+        report states the reason in each such case.
+      </p>
+
+      <h2>Evidence fields</h2>
+      <p>
+        Every placement's verdict ships with the measurements behind it.
+        The same fields appear in the PDF report, the CSV/JSON exports and
+        the raw evidence file.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Field</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">offset_sec</td><td>Where the match starts inside the published episode.</td></tr>
+            <tr><td class="mono">covered_time_sec</td><td>How much of the creative's runtime the matches cover.</td></tr>
+            <tr><td class="mono">coverage_ratio</td><td>Coverage relative to the creative's own self-match profile.</td></tr>
+            <tr><td class="mono">missing_head_sec / missing_tail_sec</td><td>Missing runtime at the start or end of the creative, in excess of the self-match profile.</td></tr>
+            <tr><td class="mono">largest_interior_gap_sec</td><td>The largest uncovered stretch inside the matched span.</td></tr>
+            <tr><td class="mono">match_count</td><td>Number of aligned landmark pairs supporting the match.</td></tr>
+            <tr><td class="mono">confidence</td><td>Policy confidence for the verdict, from 0 to 1. It is not a probability of legal admissibility.</td></tr>
+            <tr><td class="mono">evidence_tier</td><td>How the media was obtained: Tier 1 independently captured, Tier 2 independently retrieved from the publisher's public distribution, Tier 3 customer-supplied, Tier 4 unverified. Claim strength in the report follows the tier.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Re-checking a finding</h2>
+      <p>
+        Audits are reproducible: the same creative files and the same
+        published media produce the same report. Every media file entering
+        an audit is hashed and its source recorded, so any placement's
+        evidence can be traced to a specific file from a specific source
+        and re-processed. Raw verification events, the per-match records
+        behind every verdict, are exported alongside the report and are
+        never discarded after classification.
+      </p>
+
+      <h2>Known limits</h2>
+      <p>
+        The engine's calibration is validated on labelled synthetic
+        corpora; real-world performance is being established with each
+        engagement. Verification requires the published media to be
+        independently observable: dynamically inserted placements that vary
+        per listener often cannot be verified from a public feed, and
+        host-read segments are outside current scope. Findings are
+        algorithmic evidence, not legal proof.
+      </p>
+
+    </div>
+  </section>
+</Base>
+
+<style>
+  .narrow {
+    max-width: 780px;
+  }
+  .page-head {
+    background: var(--indigo-deep);
+    background-image: var(--grid-dots);
+    padding: clamp(56px, 7vw, 88px) 0;
+    color: var(--white);
+  }
+  .page-head .kicker {
+    color: var(--teal);
+  }
+  .page-head h1 {
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .page-head__sub {
+    color: #c9d3e4;
+    font-size: 1.15rem;
+    max-width: 60ch;
+    margin: 0;
+  }
+  .table-wrap {
+    border: 1px solid var(--grey-soft);
+    border-radius: var(--radius-lg);
+    background: var(--white);
+    box-shadow: var(--shadow-1);
+    padding: 8px;
+    margin: 20px 0;
+  }
+</style>

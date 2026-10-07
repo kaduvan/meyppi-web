@@ -18,7 +18,7 @@ const steps = [
     icon: 'M4 12h6l2-5 4 10 2-5h2',
     body: [
       'We pull the published episodes from their RSS feeds and other sources we are authorised to use. If you hold recordings already, for example from a monitoring tool or a previous campaign, those go into the same pipeline.',
-      'Before anything is processed, each file is hashed and logged with its source. From this point on, every claim in the final report can be traced back to a specific file with a specific hash from a specific source. That provenance is what makes the evidence worth having.',
+      'Before anything is processed, each file is hashed and logged with its source (see the <a href="/security">security and data handling</a> page). From this point on, every claim in the final report can be traced back to a specific file with a specific hash from a specific source. That provenance is what makes the evidence worth having.',
     ],
   },
   {
@@ -35,8 +35,8 @@ const steps = [
     title: 'We classify every placement',
     icon: 'M5 4h14v16H5z M9 10l2 2 4-4',
     body: [
-      'Each expected placement is classified from the match forensics: Detected full, Detected partial, Version mismatch, Not detected, Insufficient signal, or Manual review required. The distinctions matter. A 24-second cut of a 30-second buy is not "delivered". Version 2 airing where version 1 was contracted is not "delivered".',
-      'When several versions of a creative exist, the classifier ranks the evidence between siblings before attributing a version, so a mismatch is a finding, not a guess. Anything the pipeline cannot resolve with confidence is escalated to a person, and the report says that is what happened.',
+      'Each expected placement gets one of six verdicts: Detected — Full, Detected — Partial, Version Mismatch, Not Detected, Insufficient Signal, or Manual Review Required (definitions on the sample report and methodology pages). The distinctions matter. A 24-second cut of a 30-second buy is not full delivery. Version 2 airing where version 1 was contracted is a version mismatch.',
+      'When several versions of a creative exist, the classifier ranks the evidence between siblings before attributing a version, so a version mismatch is reported only when the evidence supports it. Anything the pipeline cannot resolve with confidence is escalated to a person, and the report says that is what happened.',
     ],
   },
   {
@@ -51,7 +51,7 @@ const steps = [
 ];
 
 const checklist = [
-  'Master creative files for every contracted version (WAV or MP3, the actual aired cut)',
+  'Master creative files for every contracted version (WAV, MP3 or M4A, the exact cut that was supposed to air)',
   'Insertion order or placement plan: publishers, shows, episodes, flight dates',
   'Campaign dates, and confirmation the campaign has finished airing',
   'If you have them: existing recordings or monitoring exports (optional)',
@@ -68,8 +68,7 @@ const checklist = [
       <span class="kicker">Process</span>
       <h1>How a Meyppi audit works.</h1>
       <p class="hiw-head__sub">
-        You can read this page in two minutes and know exactly what you
-        would be paying for. That is deliberate.
+        What you send, what we do with it, and what comes back.
       </p>
     </div>
   </section>
@@ -129,8 +128,7 @@ const checklist = [
         <p>
           From receiving the creatives and media access, a typical
           single-campaign audit completes in five to ten working days.
-          Processing itself is fast, over a thousand audio-minutes per
-          CPU-hour; the calendar time goes into source collection and into
+          Processing itself is fast, over 1,000 audio-minutes per CPU-hour; the calendar time goes into source collection and into
           the manual review of flagged placements, which we do not rush.
         </p>
         <p>

@@ -97,7 +97,8 @@ it possible on the free tier.
   serve functions, so URL fetching only works on the deployed site or via
   `npx wrangler pages dev`.
 - **One-check gate**: soft, via `localStorage` (lead magnet, not
-  security). Append `?dev=1` to bypass while testing.
+  security). Bypassed automatically on localhost builds; in production the
+  gate always applies.
 - **Limits**: episodes up to 90 minutes; a one-hour episode takes roughly
   a minute of fingerprinting on a laptop (progress bar shown).
 

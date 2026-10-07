@@ -94,14 +94,26 @@ const configured = Boolean(SITE.formEndpoint);
 
         <aside class="contact-side">
           <div class="card card--flat">
+            <h3>What happens next</h3>
+            <ol class="next-steps">
+              <li>We reply within one working day with scope and a fixed quote.</li>
+              <li>Written engagement; mutual NDA available on request.</li>
+              <li>You send masters, the insertion order and media access.</li>
+              <li>Report in five to ten working days, evidence attached.</li>
+            </ol>
+          </div>
+          <div class="card card--flat">
+            <h3>Vendor onboarding</h3>
+            <p>
+              Company profile, sample report and standard onboarding
+              documents available on request.
+            </p>
+          </div>
+          <div class="card card--flat">
             <h3>Direct contact</h3>
             <p>
               <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
             </p>
-          </div>
-          <div class="card card--flat">
-            <h3>Response time</h3>
-            <p>Within one working day.</p>
           </div>
           <div class="card card--flat">
             <h3>Paid service</h3>
@@ -161,6 +173,15 @@ const configured = Boolean(SITE.formEndpoint);
   .contact-side p {
     margin: 0;
     font-size: 15px;
+  }
+  .next-steps {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .next-steps li {
+    margin-bottom: 8px;
   }
   @media (max-width: 900px) {
     .contact-grid {

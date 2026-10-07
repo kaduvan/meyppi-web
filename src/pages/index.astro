@@ -38,7 +38,7 @@ const deliverables = [
   },
   {
     title: 'Exception review',
-    body: 'Where the evidence is ambiguous, a person looks at it and says so in the report. Ambiguity is reported, not smoothed over.',
+    body: 'Where the evidence is ambiguous, a person looks at it and says so in the report. Ambiguity is reported and explained.',
     icon: 'flag',
   },
 ];
@@ -146,11 +146,11 @@ const icons: Record<string, string> = {
     <!-- trust strip -->
     <div class="hero__strip">
       <div class="container hero__strip-inner">
-        <span>We are not your agency and not your publisher</span>
+        <span>Independent of agencies, publishers and networks</span>
         <span class="hero__strip-div" aria-hidden="true"></span>
-        <span>Four possible verdicts per placement, never a vague "verified"</span>
+        <span>Six verdicts per placement, each with its evidence attached</span>
         <span class="hero__strip-div" aria-hidden="true"></span>
-        <span>Evidence, on record. Not legal proof, and we say so</span>
+        <span>Report scope and limits stated up front</span>
       </div>
     </div>
   </section>
@@ -218,7 +218,7 @@ const icons: Record<string, string> = {
         <span class="kicker">The deliverable</span>
         <h2>A discrepancy report you can put in front of a client.</h2>
         <p class="section__lede">
-          Not a dashboard login, not a slide deck. A report: every placement
+          A report, delivered as PDF and data exports: every placement
           classified, every classification backed by evidence you can open
           and inspect.
         </p>
@@ -232,11 +232,12 @@ const icons: Record<string, string> = {
         <div class="preview__body">
           <div class="preview__summary">
             <div class="stat"><span class="stat__num">5</span><span class="stat__label">Expected</span></div>
-            <div class="stat"><span class="stat__num">2</span><span class="stat__label">Verified full</span></div>
+            <div class="stat"><span class="stat__num">2</span><span class="stat__label">Detected — Full</span></div>
             <div class="stat"><span class="stat__num">1</span><span class="stat__label">Partial</span></div>
-            <div class="stat"><span class="stat__num">1</span><span class="stat__label">Version mismatch</span></div>
-            <div class="stat"><span class="stat__num">1</span><span class="stat__label">Not detected</span></div>
+            <div class="stat"><span class="stat__num">1</span><span class="stat__label">Version Mismatch</span></div>
+            <div class="stat"><span class="stat__num">1</span><span class="stat__label">Not Detected</span></div>
           </div>
+          <p class="preview__note">Excerpt: 4 of 5 placements</p>
           <div class="table-wrap">
             <table>
               <thead>
@@ -244,7 +245,7 @@ const icons: Record<string, string> = {
               </thead>
               <tbody>
                 <tr><td class="mono">EP-1041</td><td>Publisher A</td><td>CR-A v1 · 30s</td><td>v1 · 30.0s @ 00:01:30</td><td><span class="chip chip--full">Detected — Full</span></td></tr>
-                <tr><td class="mono">EP-1042</td><td>Publisher A</td><td>CR-A v1 · 30s</td><td>v1 · 24.0s (tail missing)</td><td><span class="chip chip--partial">Detected — Partial</span></td></tr>
+                <tr><td class="mono">EP-1042</td><td>Publisher A</td><td>CR-A v1 · 30s</td><td>v1 · 24.2s (tail missing)</td><td><span class="chip chip--partial">Detected — Partial</span></td></tr>
                 <tr><td class="mono">EP-1043</td><td>Publisher B</td><td>CR-A v1 · 30s</td><td>v2 aired (substituted)</td><td><span class="chip chip--mismatch">Version Mismatch</span></td></tr>
                 <tr><td class="mono">EP-1044</td><td>Publisher B</td><td>CR-A v1 · 30s</td><td>No occurrence found</td><td><span class="chip chip--notdetected">Not Detected</span></td></tr>
               </tbody>
@@ -289,9 +290,10 @@ const icons: Record<string, string> = {
         <div class="card card--flat reveal">
           <h3>For agencies</h3>
           <p>
-            Your name is on the client report. Meyppi gives you numbers you
-            did not produce yourself, which is exactly what makes them worth
-            having when a placement is disputed.
+            Your name is on the client report. Meyppi gives you
+            placement-level numbers produced outside your own reporting
+            stack, which is what makes them useful when a placement is
+            disputed.
           </p>
           <a href="/for-agencies">How agencies work with us</a>
         </div>
@@ -544,6 +546,12 @@ const icons: Record<string, string> = {
   }
   .preview__summary .stat__num {
     font-size: 1.9rem;
+  }
+  .preview__note {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 10px;
   }
   .preview__foot {
     display: flex;

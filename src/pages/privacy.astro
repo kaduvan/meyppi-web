@@ -5,52 +5,101 @@ import { SITE } from '../lib/site';
 
 <Base
   title="Privacy Policy"
-  description="Meyppi privacy policy. No cookies, no tracking pixels, privacy-first analytics."
+  description="Meyppi privacy policy: what we collect by source, why, sub-processors, retention, deletion, your rights, and exactly what the free check sends."
 >
   <section class="section">
-    <div class="container narrow">
+    <div class="container narrow prose">
       <h1>Privacy Policy</h1>
-      <p class="muted">Last updated: 1 October 2026</p>
+      <p class="muted">Last updated: 7 October 2026</p>
 
-      <h2>What we collect</h2>
+      <h2>Who we are</h2>
       <p>
-        When you submit the audit request form we collect the details you
-        provide: name, company, role, email, campaign count range, spend
-        range, and your one-line description. We use this solely to respond
-        to your request and scope an audit.
+        Meyppi, an independent media delivery verification practice founded
+        and run by Prem Kumar Manickam, based in India. Privacy contact:
+        <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+        We respond to privacy questions and grievances within one working
+        day.
       </p>
 
-      <h2>Website analytics</h2>
+      <h2>What we collect, by source</h2>
+      <ul>
+        <li><strong>Audit request form:</strong> name, company, role, email, campaign count range, spend range, and your one-line description. Used only to respond and scope an audit.</li>
+        <li><strong>Email correspondence:</strong> whatever you choose to send.</li>
+        <li><strong>Free check:</strong> see the section below; uploaded files never leave your browser.</li>
+        <li><strong>Website analytics:</strong> Cloudflare Web Analytics aggregates page-view counts without cookies and without tracking individual visitors. No Google Analytics or cross-site tracking.</li>
+        <li><strong>Server logs:</strong> standard edge-server request logs (URL, time, IP) kept by our hosting provider for security and abuse prevention.</li>
+      </ul>
+
+      <h2>Why we use it</h2>
       <p>
-        This site uses Cloudflare Web Analytics, which aggregates page-view
-        counts without cookies and without tracking individual visitors.
-        We do not use Google Analytics or any cross-site tracking.
+        One purpose per data type. Form data and correspondence: responding
+        and scoping. Client campaign material: producing the contracted
+        report, processed only on your instructions under the Service
+        Terms. Nothing is used for advertising or sold.
       </p>
+
+      <h2>Client campaign material</h2>
+      <p>
+        Creatives and media rarely contain personal data; insertion orders
+        and correspondence may. Client material is processed solely to
+        produce your report, is stored as described on the
+        <a href="/security">security and data handling</a> page, and is not
+        shared with third parties.
+      </p>
+
+      <h2>Sub-processors</h2>
+      <p>
+        Cloudflare (hosting, free-check proxy, optional cookieless
+        analytics), Formspree (form handling, when used) and Google Fonts
+        (typeface delivery). The current list with purposes and locations
+        is on the <a href="/security">security page</a>.
+      </p>
+
+      <h2>Retention</h2>
+      <p>
+        Form submissions are kept only as long as needed to respond and
+        scope the request. Audit material (creatives, media and evidence
+        exports) is retained so findings can be re-examined and is deleted
+        on written request with confirmation; retention periods per
+        engagement are stated in the engagement letter.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        You may request access to, correction of, or erasure of your
+        personal data, raise a grievance, or nominate a representative, by
+        writing to
+        <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+        We respond within one working day and action requests within a
+        further five.
+      </p>
+
+      <h2>The free check, precisely</h2>
+      <ul>
+        <li>Uploaded creative files are processed in your browser's memory and never leave your device.</li>
+        <li>Audio URLs you paste are fetched through a streaming proxy that stores nothing and keeps no database record; standard edge request logs remain as above.</li>
+        <li>The one-check limit is a value in your browser's local storage. The site sets no cookies and does not fingerprint visitors.</li>
+      </ul>
 
       <h2>Cookies</h2>
-      <p>This site sets no cookies. There is no cookie banner because there are no cookies.</p>
-
-      <h2>Campaign material</h2>
       <p>
-        Creative files and media you provide for an audit are processed
-        only to produce your audit, are stored with documented permission,
-        and are not shared with third parties. Every artifact carries an
-        evidence tier describing how the media was obtained. Publishers
-        and other parties named in a report do not receive it unless you
-        choose to share it.
+        This site sets no cookies. There is no cookie banner because there
+        are no cookies.
       </p>
 
-      <h2>Retention and deletion</h2>
+      <h2>Security and breach notification</h2>
       <p>
-        Audit material, creatives, media, and evidence exports, is
-        retained so findings can be re-examined later, and is deleted on
-        written request. Form submissions are kept only as long as needed
-        to respond and scope the request.
+        Measures and commitments are summarised on the
+        <a href="/security">security page</a>. Affected clients are
+        notified promptly in the event of an incident involving their
+        material.
       </p>
 
-      <h2>Contact</h2>
+      <h2>Changes</h2>
       <p>
-        Privacy questions: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+        Material changes are announced on this page with a new effective
+        date. This policy is written to India's DPDP framework; it is
+        informational and not a substitute for legal advice.
       </p>
     </div>
   </section>

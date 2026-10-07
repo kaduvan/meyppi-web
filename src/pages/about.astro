@@ -5,7 +5,7 @@ import Logo from '../components/Logo.astro';
 
 <Base
   title="About"
-  description="Meyppi is an independent media delivery verification company based in India. From Tamil mei (மெய்), truth. What we verify, how we work, and what we refuse to claim."
+  description="Meyppi is an independent media delivery verification practice founded and run by Prem Kumar Manickam. From Tamil mei (மெய்), truth."
 >
   <section class="about-head">
     <div class="container about-head__grid">
@@ -13,9 +13,10 @@ import Logo from '../components/Logo.astro';
         <span class="kicker">About</span>
         <h1>Verification that starts from the media itself.</h1>
         <p>
-          Meyppi is an independent media delivery verification company. We
-          take a campaign you have already paid for, go back to the
-          published media, and establish what actually ran.
+          Meyppi is an independent media delivery verification practice,
+          founded and run by Prem Kumar Manickam. We take a campaign you
+          have already paid for, go back to the published media, and
+          establish what actually ran.
         </p>
       </div>
       <div class="about-head__mark" aria-hidden="true">
@@ -27,13 +28,23 @@ import Logo from '../components/Logo.astro';
   <section class="section">
     <div class="container prose">
 
+      <!-- FOUNDER: add photo, LinkedIn and 2-3 lines of background here
+           once supplied; keep statements factual (years, organisations). -->
+      <h2>Who runs Meyppi</h2>
+      <p>
+        Meyppi is founded and operated by Prem Kumar Manickam. The company
+        is based in India and works with agencies and brands on podcast
+        and digital audio campaigns. Company registration details are
+        available on request.
+      </p>
+
       <h2>Why this company exists</h2>
       <p>
-        Audio advertising in India grew up fast. Budgets moved into podcasts
-        and digital audio, insertion orders got longer, and the reporting
-        stayed exactly where it was in 2015: a spreadsheet from the
-        publisher, a summary from the agency, and a number everyone agrees
-        to believe.
+        Audio advertising in India grew up fast. Budgets moved into
+        podcasts and digital audio, insertion orders got longer, and the
+        reporting stayed exactly where it was in 2015: a spreadsheet from
+        the publisher, a summary from the agency, and a number everyone
+        agrees to believe.
       </p>
       <p>
         Most of the time that number is fine. But nobody involved is
@@ -52,40 +63,24 @@ import Logo from '../components/Logo.astro';
         episode, and for how long.
       </p>
 
-      <div class="pull">
-        <p>மெய்</p>
-        <cite>
-          mei (Tamil): truth; that which is real. The word the company is
-          named after, and the standard the reports are held to.
-        </cite>
-      </div>
-
       <h2>The name</h2>
       <p>
-        Meyppi comes from the Tamil word <em>mei</em>, மெய். It means truth,
-        or more precisely, that which is real. Not truth as an opinion or a
-        promise. Truth as verifiable fact.
-      </p>
-      <p>
-        The name is a constraint as much as a brand. If a report from this
-        company says a placement ran for 24 of 30 contracted seconds, that
+        Meyppi comes from the Tamil word <em>mei</em>, மெய்: truth, or
+        more precisely, that which is real. If a report from this company
+        says a placement ran for 24 of 30 contracted seconds, that
         statement has to survive being checked. It is backed by the file
         hashes, match offsets and raw evidence that ship with every audit,
-        or it does not get made. Where the evidence is thin, the report
-        says so and the placement is marked for manual review instead.
-      </p>
-      <p>
-        We picked a word that would embarrass us if we cut corners.
+        or it does not get made.
       </p>
 
       <h2>What actually happens in an audit</h2>
       <p>
-        The pipeline is boring on purpose. You send the master creative
-        files, every version that was contracted, along with the placement
-        plan: which publishers, which episodes, which dates. We collect the
-        published media from RSS feeds and other permitted sources, or from
-        recordings you already hold, and we record where each file came
-        from.
+        The pipeline is deliberately conventional. You send the master
+        creative files, every version that was contracted, along with the
+        placement plan: which publishers, which episodes, which dates. We
+        collect the published media from RSS feeds and other permitted
+        sources, or from recordings you already hold, and we record where
+        each file came from.
       </p>
       <p>
         Each creative and each episode is then fingerprinted. A
@@ -120,13 +115,13 @@ import Logo from '../components/Logo.astro';
       </p>
       <p>
         It cannot verify what it cannot observe. If an episode was never
-        published anywhere we are permitted to access, the honest answer is
-        "Insufficient Signal", and that is the answer you will get. We do
-        not compensate for missing media with cleverer algorithms, and we
-        do not scrape sources we are not authorised to use.
+        published anywhere we are permitted to access, that placement
+        cannot be audited and is reported as out of scope; we do not
+        compensate for missing media with cleverer algorithms, and we do
+        not scrape sources we are not authorised to use.
       </p>
       <p>
-        And in V1 it covers pre-produced audio creatives in podcast and
+        And the service covers pre-produced audio creatives in podcast and
         digital audio. Dynamic ad insertion, host-read spots and video are
         real problems that deserve real solutions later. They are not
         quietly lumped into a vague "verified" tick.
@@ -135,16 +130,14 @@ import Logo from '../components/Logo.astro';
       <h2>Independence</h2>
       <p>
         Meyppi is not part of any agency, publisher, network or adtech
-        vendor, and does not buy or sell media. The only party we work for
-        is the one who commissioned the audit. That is not a slogan; it is
-        the entire commercial model. A verification company with a media
-    side business is a verification company with a conflict of interest.
+        vendor, and does not buy or sell media. The founder holds no role
+        or stake in any agency, publisher or ad network. Meyppi's only
+        revenue is audit fees paid by the party that commissions the
+        audit.
       </p>
 
       <p class="note">
-        Meyppi is based in India and works with agencies and brands on
-        podcast and digital audio campaigns. If you want to know whether
-        your last campaign ran as contracted,
+        If you want to know whether your last campaign ran as contracted,
         <a href="/contact">that conversation starts here</a>.
       </p>
     </div>
@@ -185,10 +178,6 @@ import Logo from '../components/Logo.astro';
     font-style: normal;
     color: var(--teal-dark);
     font-weight: 600;
-  }
-  .pull p {
-    font-size: clamp(2.6rem, 5vw, 3.6rem);
-    line-height: 1.1;
   }
   @media (max-width: 900px) {
     .about-head__grid {

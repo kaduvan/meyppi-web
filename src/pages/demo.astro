@@ -29,7 +29,7 @@ const placements = [
       evidence_tier: 2,
       confidence: 0.99,
       processing: {
-        engine: 'aircheck-fingerprint',
+        engine: 'meyppi-fingerprint 1.0',
         attributed_version: 'v1',
         content_sha256: '9f2c…a41d (redacted)',
       },
@@ -47,7 +47,7 @@ const placements = [
     id: 'EP-1042',
     publisher: 'Publisher A (redacted)',
     expected: 'CR-A v1 · 30s',
-    observed: 'CR-A v1 · 24.0s (tail missing 5.8s)',
+    observed: 'CR-A v1 · 24.2s (tail missing 5.75s)',
     cls: 'partial',
     clsLabel: 'Detected — Partial',
     conf: '0.90',
@@ -65,7 +65,7 @@ const placements = [
       evidence_tier: 2,
       confidence: 0.9,
       processing: {
-        engine: 'aircheck-fingerprint',
+        engine: 'meyppi-fingerprint 1.0',
         attributed_version: 'v1',
         content_sha256: '31bd…77e9 (redacted)',
       },
@@ -101,7 +101,7 @@ const placements = [
       evidence_tier: 2,
       confidence: 0.9,
       processing: {
-        engine: 'aircheck-fingerprint',
+        engine: 'meyppi-fingerprint 1.0',
         attributed_version: 'v2',
         content_sha256: 'c50a…19f4 (redacted)',
       },
@@ -136,7 +136,7 @@ const placements = [
       evidence_tier: 2,
       confidence: 0.95,
       processing: {
-        engine: 'aircheck-fingerprint',
+        engine: 'meyppi-fingerprint 1.0',
         attributed_version: null,
         content_sha256: '77ce…02ab (redacted)',
       },
@@ -170,7 +170,7 @@ const placements = [
       evidence_tier: 2,
       confidence: 0.99,
       processing: {
-        engine: 'aircheck-fingerprint',
+        engine: 'meyppi-fingerprint 1.0',
         attributed_version: 'v2',
         content_sha256: 'b1d9…6c3e (redacted)',
       },
@@ -205,7 +205,7 @@ const fmtTime = (s: number) =>
           <h1>Campaign Delivery Audit</h1>
           <p class="demo-head__meta">
             Campaign <strong>CMP-XXXXX</strong> (redacted) · Client
-            [Redacted] · Audit period 01–31 Oct 2026 · Audit date 07 Oct 2026
+            [Redacted] · Audit period 01–30 Sep 2026 · Audit date 7 Oct 2026
           </p>
         </div>
         <Logo variant="mark-reverse" width={150} />
@@ -223,10 +223,10 @@ const fmtTime = (s: number) =>
       <!-- summary -->
       <div class="summary">
         <div class="stat"><span class="stat__num">5</span><span class="stat__label">Expected</span></div>
-        <div class="stat"><span class="stat__num">2</span><span class="stat__label">Verified full</span></div>
+        <div class="stat"><span class="stat__num">2</span><span class="stat__label">Detected — Full</span></div>
         <div class="stat"><span class="stat__num">1</span><span class="stat__label">Partial</span></div>
-        <div class="stat"><span class="stat__num">1</span><span class="stat__label">Version mismatch</span></div>
-        <div class="stat"><span class="stat__num">1</span><span class="stat__label">Not detected</span></div>
+        <div class="stat"><span class="stat__num">1</span><span class="stat__label">Version Mismatch</span></div>
+        <div class="stat"><span class="stat__num">1</span><span class="stat__label">Not Detected</span></div>
       </div>
 
       <!-- filters -->

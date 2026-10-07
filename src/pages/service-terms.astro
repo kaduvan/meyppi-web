@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site';
+---
+
+<Base
+  title="Service Terms"
+  description="Terms governing paid Meyppi campaign audits: scope, client obligations, confidentiality, ownership, liability limits, payment and governing law."
+>
+  <section class="section">
+    <div class="container narrow prose">
+      <h1>Service Terms</h1>
+      <p class="muted">Last updated: 7 October 2026</p>
+
+      <p>
+        These terms govern paid campaign delivery audits supplied by
+        Meyppi. They are referenced in every quote and engagement letter,
+        which together form the agreement for each engagement.
+      </p>
+
+      <h2>Scope of an audit</h2>
+      <p>
+        An audit verifies whether contracted, pre-produced audio creatives
+        appeared in independently observable published media: which
+        placements ran, which version, at what position, and for how much
+        of the contracted runtime. Scope, sources and any exclusions are
+        confirmed in writing before work starts. Dynamic ad insertion,
+        host-read verification, video sources and legal testimony are
+        outside current scope.
+      </p>
+
+      <h2>Client obligations</h2>
+      <ul>
+        <li>Supply master creative files for every contracted version, the insertion order or placement plan, and campaign dates.</li>
+        <li>Confirm the right to provide the creatives and any recordings supplied.</li>
+        <li>Make media access available where the audit depends on it, and identify a contact for contract questions.</li>
+      </ul>
+
+      <h2>Confidentiality</h2>
+      <p>
+        Each party keeps the other's non-public material confidential and
+        uses it only for the engagement. Client campaign material is not
+        published or shared; findings belong to the commissioning party.
+        A mutual NDA is available on request.
+      </p>
+
+      <h2>Ownership</h2>
+      <p>
+        The client owns its creatives, media and the delivered report and
+        evidence exports. Meyppi retains its methodology, engine and
+        aggregate, non-identifying calibration knowledge. Published use of
+        report excerpts is fine; please do not alter findings when quoting
+        them.
+      </p>
+
+      <h2>No warranty of legal admissibility</h2>
+      <p>
+        Reports are algorithmic findings with documented methodology,
+        evidence and confidence values. They are supplied as evidence for
+        commercial reconciliation and reporting, without warranty of
+        admissibility in any legal proceeding.
+      </p>
+
+      <h2>Payment</h2>
+      <p>
+        A fixed quote per campaign is agreed in writing before work
+        starts. Invoicing terms, including any advance and the invoice due
+        period, are stated in the quote. Prices are exclusive of
+        applicable taxes unless stated otherwise.
+      </p>
+
+      <h2>Limitation of liability</h2>
+      <p>
+        Each party's aggregate liability under an engagement is capped at
+        the fees paid for that engagement. Neither party is liable for
+        indirect or consequential losses.
+      </p>
+
+      <h2>Termination</h2>
+      <p>
+        Either party may terminate an engagement in writing; work
+        completed to that date is invoiced pro rata and delivered
+        material is handled per the retention terms.
+      </p>
+
+      <h2>Governing law</h2>
+      <p>
+        Governed by the laws of India, with exclusive jurisdiction in the
+        courts of the city of Meyppi's registered office.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .narrow {
+    max-width: 720px;
+  }
+  .muted {
+    color: var(--muted);
+    font-size: 14px;
+  }
+</style>
