@@ -5,7 +5,7 @@ export const SITE = {
   url: 'https://meyppi.com',
   tagline: 'Independent media delivery verification',
   description:
-    'Meyppi independently verifies whether contracted audio creatives appeared in published media — when they ran, which version, and whether delivery was complete.',
+    'Meyppi independently verifies whether contracted audio creatives appeared in published media: when they ran, which version, and whether delivery was complete.',
   contactEmail: 'hello@meyppi.com',
   // Formspree endpoint — set PUBLIC_FORMSPREE_ENDPOINT (env) after creating
   // the form at https://formspree.io. Until set, the contact form shows a
@@ -18,6 +18,7 @@ export const NAV_LINKS = [
   { href: '/how-it-works', label: 'How It Works' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/sample-report', label: 'Sample Report' },
+  { href: '/free-check', label: 'Free Check' },
   { href: '/about', label: 'About' },
 ];
 

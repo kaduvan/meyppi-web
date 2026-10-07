@@ -68,6 +68,39 @@ It derives, with background removed:
 
 Replace `brand-assets/logo-a.png` and rebuild to regenerate everything.
 
+## Free check (`/free-check`) — engine in the browser
+
+One free verification per visitor: their creative (file or URL) against one
+published episode URL (direct audio link or RSS feed). The entire
+fingerprint pipeline, an ES-module port of the Aircheck engine with the
+same parameters (22.05 kHz, FFT-1024/hop-256, 20x20 peaks, 1.5 s zone,
+fanout 12; offset-cluster alignment; self-normalized forensics; the
+calibrated classifier), runs in a Web Worker in the visitor's browser.
+Nothing is uploaded; compute costs the site nothing, which is what makes
+it possible on the free tier.
+
+- **Engine**: `src/lib/engine/fp-core.js` (environment-agnostic),
+  `src/lib/engine/worker.js` (browser wrapper).
+- **Validation**: `npm run validate:engine` runs the JS engine against the
+  Python engine's demo-campaign ground truth WAVs (expected: full @
+  90.001 s, partial with 5.75 s tail missing, not_detected, self-match).
+  It reads from `../aircheck/audits/demo/media` — pass the aircheck repo
+  path as an argument if it lives elsewhere. Re-run it after touching the
+  engine.
+- **URL fetching**: browsers cannot fetch most podcast audio directly
+  (no CORS headers on CDN hosts), so `functions/proxy.js` (Cloudflare
+  Pages Function) streams remote media through the deployment with CORS
+  enabled. It blocks private/loopback targets, enforces media/XML content
+  types, caps size at 300 MB, and rate-limits per IP. It stores nothing.
+  Pages Functions deploy automatically with the site (the `functions/`
+  directory); no configuration needed. Locally, `astro preview` does not
+  serve functions, so URL fetching only works on the deployed site or via
+  `npx wrangler pages dev`.
+- **One-check gate**: soft, via `localStorage` (lead magnet, not
+  security). Append `?dev=1` to bypass while testing.
+- **Limits**: episodes up to 90 minutes; a one-hour episode takes roughly
+  a minute of fingerprinting on a laptop (progress bar shown).
+
 ## Interactive demo (`/demo`) and login gating
 
 `/demo` is an interactive version of the sample report (filters, per-row

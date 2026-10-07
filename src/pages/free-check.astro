@@ -1,0 +1,477 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+---
+
+<Base
+  title="Free Check"
+  description="One free verification check: your creative, one published episode URL, and the same fingerprint matching our audits use. Runs entirely in your browser."
+>
+  <section class="fc-head">
+    <div class="container">
+      <span class="kicker">Free check · one per visitor</span>
+      <h1>Did your ad run in that episode?</h1>
+      <p class="fc-head__sub">
+        Give us the creative file and the URL of a published episode. The
+        same fingerprint matching behind Meyppi audits runs right here in
+        your browser: nothing is uploaded, no account, no cost. One check,
+        honest classification, evidence attached.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container fc">
+
+      <div id="fc-used" class="card fc__used" hidden>
+        <h2>You have used your free check.</h2>
+        <p>
+          The free check is one per visitor. If something looked wrong in
+          your result, that is exactly what a full campaign audit is for:
+          every placement, every publisher, a report you can take to
+          either.
+        </p>
+        <div class="fc__used-ctas">
+          <Button variant="primary" href="/contact">Request a Campaign Audit</Button>
+          <a class="btn btn--secondary" href="/pricing">See pricing</a>
+        </div>
+      </div>
+
+      <form id="fc-form" class="fc__form" novalidate>
+        <div class="fc__field">
+          <label class="fc__label" for="fc-creative">Your creative</label>
+          <p class="fc__hint">The master audio file of the ad (MP3, WAV, M4A; the exact cut that was supposed to air).</p>
+          <div class="fc__tabs" role="tablist">
+            <button type="button" class="fc__tab is-active" data-tab="file" role="tab" aria-selected="true">Upload file</button>
+            <button type="button" class="fc__tab" data-tab="url" role="tab" aria-selected="false">From URL</button>
+          </div>
+          <div class="fc__pane" data-pane="file">
+            <input type="file" id="fc-creative" accept="audio/*,.mp3,.wav,.m4a,.mp4,.ogg" />
+          </div>
+          <div class="fc__pane" data-pane="url" hidden>
+            <input type="url" id="fc-creative-url" placeholder="https://cdn.example.com/ad-master.mp3" />
+          </div>
+        </div>
+
+        <div class="fc__field">
+          <label class="fc__label" for="fc-episode">Published episode URL</label>
+          <p class="fc__hint">
+            A direct audio link (MP3/M4A) or the podcast's RSS feed, we take
+            its latest episode. Right-click the episode's download button and
+            copy the link.
+          </p>
+          <input type="url" id="fc-episode" placeholder="https://feeds.example.com/show.mp3" />
+        </div>
+
+        <div class="fc__actions">
+          <button type="submit" class="btn btn--primary" id="fc-run">Run the free check</button>
+          <p class="fc__privacy">
+            Runs entirely in your browser. Your creative file never leaves
+            your device; the episode is fetched from its public URL and is
+            not stored anywhere.
+          </p>
+        </div>
+      </form>
+
+      <div id="fc-progress" class="fc__progress" hidden>
+        <p id="fc-progress-label" class="fc__progress-label">Preparing…</p>
+        <div class="fc__bar"><div id="fc-bar-fill" class="fc__bar-fill"></div></div>
+        <p class="fc__progress-note">Fingerprinting is CPU work; a one-hour episode takes roughly a minute on a laptop.</p>
+      </div>
+
+      <div id="fc-error" class="fc__error" hidden>
+        <h3>Could not run the check</h3>
+        <p id="fc-error-msg"></p>
+      </div>
+
+      <div id="fc-result" class="fc__result" hidden>
+        <div class="fc__result-head">
+          <h2 id="fc-result-title">Result</h2>
+          <span id="fc-result-chip" class="chip"></span>
+        </div>
+        <p id="fc-result-rationale" class="fc__result-rationale"></p>
+
+        <div id="fc-result-timeline"></div>
+
+        <dl class="fc__facts" id="fc-facts"></dl>
+
+        <div class="fc__result-foot">
+          <div>
+            <h3>Something look wrong?</h3>
+            <p>
+              This was one creative in one episode. A campaign audit checks
+              every placement against the contract, with a report you can
+              take to your publisher or client.
+            </p>
+          </div>
+          <Button variant="primary" href="/contact">Request a Campaign Audit</Button>
+        </div>
+
+        <p class="fc__disclaimer">
+          Free-check results are algorithmic findings from acoustic
+          fingerprint evidence, computed in your browser with the same
+          parameters as the Meyppi audit engine (validated on synthetic
+          corpora; real-world performance not yet established). This is
+          evidence, not legal proof. A finding of Not Detected on
+          dynamically inserted advertising can mean the ad was stitched per
+          listener and is not present in the public feed.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</Base>
+
+<style>
+  .fc-head {
+    background: var(--indigo-deep);
+    background-image: var(--grid-dots);
+    padding: clamp(56px, 7vw, 88px) 0;
+    color: var(--white);
+  }
+  .fc-head .kicker { color: var(--teal); }
+  .fc-head h1 { color: var(--white); margin-bottom: 14px; }
+  .fc-head__sub {
+    color: #c9d3e4;
+    font-size: 1.15rem;
+    max-width: 62ch;
+    margin: 0;
+  }
+  .section--tight { padding-top: clamp(40px, 5vw, 64px); }
+  .fc { max-width: 780px; }
+
+  .fc__used { border-left: 4px solid var(--teal); }
+  .fc__used-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+
+  .fc__form { display: grid; gap: 28px; }
+  .fc__field { display: grid; gap: 8px; }
+  .fc__label { font-weight: 600; color: var(--indigo); font-size: 1.05rem; }
+  .fc__hint { font-size: 14px; color: var(--muted); margin: 0; }
+  .fc__tabs { display: inline-flex; border: 1px solid var(--grey); border-radius: var(--radius); overflow: hidden; width: fit-content; }
+  .fc__tab {
+    font-family: var(--font); font-size: 13.5px; font-weight: 600;
+    padding: 8px 16px; border: none; background: var(--white); color: var(--indigo); cursor: pointer;
+  }
+  .fc__tab.is-active { background: var(--indigo); color: var(--white); }
+  .fc__form input[type='url'],
+  .fc__form input[type='file'] {
+    font-family: var(--font); font-size: 16px; padding: 12px 14px;
+    border: 1px solid var(--grey); border-radius: var(--radius);
+    background: var(--white); color: var(--body); width: 100%;
+  }
+  .fc__form input:focus { outline: 3px solid var(--teal); outline-offset: 0; border-color: var(--teal); }
+  .fc__actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .fc__privacy { font-size: 13.5px; color: var(--muted); max-width: 44ch; margin: 0; }
+
+  .fc__progress { margin-top: 36px; }
+  .fc__progress-label { font-weight: 600; color: var(--indigo); margin-bottom: 10px; }
+  .fc__bar {
+    height: 8px; background: var(--grey-soft); border-radius: 4px; overflow: hidden;
+  }
+  .fc__bar-fill {
+    height: 100%; width: 0%;
+    background: var(--teal); border-radius: 4px;
+    transition: width 300ms ease;
+  }
+  .fc__progress-note { font-size: 13.5px; color: var(--muted); margin-top: 10px; }
+
+  .fc__error {
+    margin-top: 32px; padding: 20px 24px; border: 1px solid #c46a6a;
+    border-radius: var(--radius-lg); background: #f9ecec;
+  }
+  .fc__error h3 { color: #8a2a2a; margin-bottom: 6px; }
+  .fc__error p { color: #6d3535; margin: 0; font-size: 15px; }
+
+  .fc__result { margin-top: 40px; }
+  .fc__result-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap; margin-bottom: 8px;
+  }
+  .fc__result-head h2 { margin: 0; }
+  .fc__result-rationale { color: var(--body); font-size: 1.05rem; max-width: 64ch; }
+  .fc__facts {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px; margin: 24px 0; padding: 0;
+  }
+  .fc__facts > div {
+    border: 1px solid var(--grey-soft); border-radius: var(--radius);
+    padding: 12px 14px; background: var(--white);
+  }
+  .fc__facts dt { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .fc__facts dd { margin: 4px 0 0; font-family: var(--mono); font-size: 1.05rem; color: var(--indigo); font-weight: 600; }
+  .fc__result-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap; margin-top: 28px; padding: 24px;
+    background: var(--teal-tint); border: 1px solid var(--teal);
+    border-left-width: 4px; border-radius: var(--radius-lg);
+  }
+  .fc__result-foot h3 { margin-bottom: 4px; }
+  .fc__result-foot p { margin: 0; color: var(--muted); font-size: 15px; max-width: 48ch; }
+  .fc__disclaimer {
+    margin-top: 24px; font-size: 13.5px; color: var(--muted);
+    border-left: 3px solid var(--grey); padding-left: 14px;
+  }
+  .fc__tl-svg { width: 100%; height: auto; margin: 8px 0 4px; }
+  .fc__tl-label { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
+  .fc__tl-seg { fill: var(--teal); fill-opacity: 0.85; }
+  .fc__tl-time { font-family: var(--mono); font-size: 11px; font-weight: 600; fill: var(--teal-dark); }
+</style>
+
+<script>
+  const form = document.getElementById('fc-form') as HTMLFormElement;
+  const usedBox = document.getElementById('fc-used');
+  const progressBar = document.getElementById('fc-progress');
+  const progressLabel = document.getElementById('fc-progress-label');
+  const barFill = document.getElementById('fc-bar-fill');
+  const errorBox = document.getElementById('fc-error');
+  const errorMsg = document.getElementById('fc-error-msg');
+  const resultBox = document.getElementById('fc-result');
+
+  const LS_KEY = 'meyppi_free_check_done';
+  const devBypass = new URLSearchParams(location.search).has('dev');
+
+  if (localStorage.getItem(LS_KEY) && !devBypass) {
+    form.hidden = true;
+    usedBox.hidden = false;
+  }
+
+  // tabs
+  document.querySelectorAll('.fc__tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.fc__tab').forEach((t) => {
+        t.classList.toggle('is-active', t === tab);
+        t.setAttribute('aria-selected', String(t === tab));
+      });
+      document.querySelectorAll('.fc__pane').forEach((p) => {
+        p.hidden = (p as HTMLElement).dataset.pane !== (tab as HTMLElement).dataset.tab;
+      });
+    });
+  });
+
+  function fail(msg: string) {
+    form.hidden = false;
+    progressBar.hidden = true;
+    errorBox.hidden = false;
+    errorMsg.textContent = msg;
+    resultBox.hidden = true;
+  }
+
+  const setProgress = (label: string, pct: number) => {
+    progressBar.hidden = false;
+    progressLabel.textContent = label;
+    barFill.style.width = `${Math.round(pct * 100)}%`;
+  };
+
+  /* ---- fetching (direct first, then same-origin proxy) ---- */
+
+  async function fetchMedia(url: string): Promise<Response> {
+    const target = new URL(url);
+    if (target.protocol !== 'http:' && target.protocol !== 'https:') {
+      throw new Error('Only http(s) URLs are supported.');
+    }
+    let resp: Response;
+    try {
+      resp = await fetch(target, { mode: 'cors' });
+    } catch {
+      resp = await fetch(`/proxy?url=${encodeURIComponent(target.href)}`);
+    }
+    if (!resp.ok) {
+      throw new Error(`The server returned ${resp.status} for that URL. Check that the link points directly to the audio file.`);
+    }
+    return resp;
+  }
+
+  /** Resolve an RSS feed URL to its latest episode enclosure. */
+  async function resolveIfFeed(url: string): Promise<{ url: string; title?: string }> {
+    const resp = await fetchMedia(url);
+    const ct = resp.headers.get('content-type') ?? '';
+    if (!/xml|rss/.test(ct) && !url.includes('xml')) {
+      if (/audio|octet-stream|mp4|mpeg/.test(ct)) return { url };
+      // body may still be XML; sniff the first bytes
+      const clone = await resp.clone().text();
+      if (!/<rss|<channel|<item/i.test(clone.slice(0, 2000))) {
+        throw new Error(`That URL is a "${ct}" document, not audio or an RSS feed. Use the episode's direct download link.`);
+      }
+      return parseFeed(clone);
+    }
+    return parseFeed(await resp.text());
+  }
+
+  function parseFeed(xml: string): { url: string; title?: string } {
+    const doc = new DOMParser().parseFromString(xml, 'text/xml');
+    const item = doc.querySelector('item');
+    const enclosure =
+      item?.querySelector('enclosure[url]') ??
+      item?.querySelector('content[url]');
+    const href = enclosure?.getAttribute('url');
+    if (!href) throw new Error('No audio enclosure found in that feed.');
+    return { url: href, title: item?.querySelector('title')?.textContent ?? undefined };
+  }
+
+  /* ---- decode ---- */
+
+  const MAX_EPISODE_SEC = 90 * 60;
+
+  async function decodeMono22050(buffer: ArrayBuffer, what: string): Promise<Float32Array> {
+    const AC: typeof OfflineAudioContext =
+      (window as any).OfflineAudioContext ?? (window as any).webkitOfflineAudioContext;
+    const ctx = new AC(1, 1, 22050);
+    let audio: AudioBuffer;
+    try {
+      audio = await ctx.decodeAudioData(buffer);
+    } catch {
+      throw new Error(`Could not decode the ${what}. Supported formats: MP3, WAV, M4A/AAC, OGG.`);
+    }
+    if (what === 'episode' && audio.duration > MAX_EPISODE_SEC) {
+      throw new Error(`That episode is ${Math.round(audio.duration / 60)} minutes long; the free check supports up to 90.`);
+    }
+    const n = audio.length;
+    const mono = new Float32Array(n);
+    for (let c = 0; c < audio.numberOfChannels; c++) {
+      const ch = audio.getChannelData(c);
+      for (let i = 0; i < n; i++) mono[i] += ch[i];
+    }
+    if (audio.numberOfChannels > 1) {
+      for (let i = 0; i < n; i++) mono[i] /= audio.numberOfChannels;
+    }
+    return mono;
+  }
+
+  /* ---- run ---- */
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorBox.hidden = true;
+    resultBox.hidden = true;
+
+    // inputs
+    const activeTab = (document.querySelector('.fc__tab.is-active') as HTMLElement)?.dataset.tab ?? 'file';
+    const creativeFile = (document.getElementById('fc-creative') as HTMLInputElement).files?.[0];
+    const creativeUrl = (document.getElementById('fc-creative-url') as HTMLInputElement).value.trim();
+    const episodeUrl = (document.getElementById('fc-episode') as HTMLInputElement).value.trim();
+
+    if (activeTab === 'file' && !creativeFile) return fail('Choose your creative file first.');
+    if (activeTab === 'url' && !creativeUrl) return fail('Paste your creative\'s URL first.');
+    if (!episodeUrl) return fail('Paste the published episode URL.');
+
+    const runBtn = document.getElementById('fc-run') as HTMLButtonElement;
+    runBtn.disabled = true;
+
+    try {
+      setProgress('Fetching audio…', 0.04);
+      let creativePcm: Float32Array;
+      if (activeTab === 'file') {
+        creativePcm = await decodeMono22050(await creativeFile.arrayBuffer(), 'creative');
+      } else {
+        const r = await fetchMedia(creativeUrl);
+        creativePcm = await decodeMono22050(await r.arrayBuffer(), 'creative');
+      }
+      setProgress('Fetched creative…', 0.08);
+
+      const ep = await resolveIfFeed(episodeUrl);
+      if (ep.title) setProgress(`Fetching episode "${ep.title.slice(0, 60)}"…`, 0.1);
+      const epResp = await fetchMedia(ep.url);
+      const epPcm = await decodeMono22050(await epResp.arrayBuffer(), 'episode');
+      setProgress('Episode decoded…', 0.14);
+      const episodeSec = epPcm.length / 22050; // before transfer detaches it
+
+      // worker compute
+      const worker = new Worker(
+        new URL('../lib/engine/worker.js', import.meta.url),
+        { type: 'module' },
+      );
+      const result = await new Promise<any>((resolve, reject) => {
+        worker.onmessage = (ev) => {
+          const d = ev.data;
+          if (d.type === 'progress') {
+            const labels: Record<string, string> = {
+              analyze: 'Fingerprinting…',
+              fingerprint: 'Fingerprinting…',
+              match: 'Matching…',
+              done: 'Classifying…',
+            };
+            setProgress(labels[d.stage] ?? 'Working…', Math.max(0.14, d.p * 0.99));
+          } else if (d.type === 'result') {
+            resolve(d.result);
+          } else if (d.type === 'error') {
+            reject(new Error(d.message));
+          }
+        };
+        worker.onerror = (err) => reject(new Error(err.message || 'engine failed'));
+        worker.postMessage(
+          { creativePcm, episodePcm: epPcm },
+          [creativePcm.buffer, epPcm.buffer],
+        );
+      });
+      worker.terminate();
+
+      showResult(result, episodeSec, ep.title);
+      localStorage.setItem(LS_KEY, new Date().toISOString());
+      form.hidden = true;
+      // eslint-disable-next-line no-console
+    } catch (err: any) {
+      fail(err?.message ?? String(err));
+    } finally {
+      runBtn.disabled = false;
+      progressBar.hidden = true;
+    }
+  });
+
+  /* ---- result rendering ---- */
+
+  const CHIP: Record<string, [string, string]> = {
+    full: ['chip--full', 'Detected — Full'],
+    partial: ['chip--partial', 'Detected — Partial'],
+    not_detected: ['chip--notdetected', 'Not Detected'],
+    insufficient_signal: ['chip--review', 'Insufficient Signal'],
+    manual_review: ['chip--review', 'Manual Review Required'],
+  };
+
+  const fmtTime = (s: number) => {
+    const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = Math.round(s % 60);
+    return `${h ? h + ':' : ''}${String(m).padStart(h ? 2 : 1, '0')}:${String(sec).padStart(2, '0')}`;
+  };
+
+  function showResult(r: any, episodeSec: number, epTitle?: string) {
+    const [chipCls, chipLabel] = CHIP[r.match_type] ?? ['chip--review', r.match_type];
+    const chip = document.getElementById('fc-result-chip');
+    chip.className = `chip ${chipCls}`;
+    chip.textContent = chipLabel;
+    document.getElementById('fc-result-rationale').textContent = r.rationale + '.';
+
+    // timeline SVG
+    const tl = document.getElementById('fc-result-timeline');
+    if (r.offset_sec !== null && r.offset_sec !== undefined) {
+      const W = 560, x = (r.offset_sec / episodeSec) * (W - 12) + 6;
+      const w = Math.max(8, (r.ref_duration_sec / episodeSec) * (W - 12));
+      tl.innerHTML = `
+        <svg class="fc__tl-svg" viewBox="0 0 560 64" role="img" aria-label="Match position in episode">
+          <text x="6" y="16" class="fc__tl-label">EPISODE ${fmtTime(episodeSec)}${epTitle ? ' · ' + epTitle.slice(0, 34) : ''}</text>
+          <rect x="2" y="26" width="556" height="14" rx="7" fill="var(--grey-soft)"/>
+          <rect x="${x.toFixed(1)}" y="20" width="${w.toFixed(1)}" height="26" rx="3" class="fc__tl-seg"/>
+          <text x="${Math.min(540, x).toFixed(1)}" y="14" class="fc__tl-time">${fmtTime(r.offset_sec)}</text>
+        </svg>`;
+    } else {
+      tl.innerHTML = '';
+    }
+
+    // facts
+    const facts: [string, string][] = [
+      ['Creative length', `${r.ref_duration_sec.toFixed(1)} s`],
+      ['Episode length', fmtTime(episodeSec)],
+    ];
+    if (r.offset_sec !== null && r.offset_sec !== undefined) {
+      facts.push(['Match offset', fmtTime(r.offset_sec)]);
+      facts.push(['Covered', `${(r.covered_time_sec ?? 0).toFixed(1)} s of ${(r.ref_duration_sec ?? 0).toFixed(1)} s`]);
+      if (r.coverage_ratio !== undefined) facts.push(['Coverage', `${(r.coverage_ratio * 100).toFixed(0)}% of self-profile`]);
+      facts.push(['Aligned matches', String(r.match_count)]);
+    }
+    facts.push(['Confidence', r.confidence.toFixed(2)]);
+    document.getElementById('fc-facts').innerHTML = facts
+      .map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`)
+      .join('');
+
+    resultBox.hidden = false;
+    resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
