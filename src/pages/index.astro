@@ -74,8 +74,8 @@ const icons: Record<string, string> = {
           <Button variant="primary" href="/contact">
             Request a Campaign Audit
           </Button>
-          <Button variant="ghost" href="/sample-report">
-            See a Sample Report
+          <Button variant="ghost" href="/free-check">
+            Run a Free Check
           </Button>
         </div>
       </div>
@@ -330,6 +330,10 @@ const icons: Record<string, string> = {
       <Button variant="primary" href="/contact">
         Request a Campaign Audit
       </Button>
+      <p class="cta-band__alt">
+        Not ready to talk? <a href="/free-check">Run one free check</a> on
+        your own creative and a published episode first.
+      </p>
     </div>
   </section>
 </Base>
@@ -583,6 +587,18 @@ const icons: Record<string, string> = {
   }
   .cta-band .btn--primary:hover {
     background: var(--teal);
+  }
+  .cta-band__alt {
+    margin: 26px 0 0;
+    font-size: 15px;
+    color: #9fabc2;
+  }
+  .cta-band__alt a {
+    color: var(--teal);
+    font-weight: 600;
+  }
+  .cta-band__alt a:hover {
+    color: var(--white);
   }
 
   @media (max-width: 1020px) {
