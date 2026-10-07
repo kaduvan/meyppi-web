@@ -40,13 +40,13 @@ import Button from '../components/Button.astro';
       <form id="fc-form" class="fc__form" novalidate>
         <div class="fc__field">
           <label class="fc__label" for="fc-creative">Your creative</label>
-          <p class="fc__hint">The master audio file of the ad (MP3, WAV, M4A; the exact cut that was supposed to air).</p>
+          <p class="fc__hint">The master file of the ad (MP3, WAV, M4A; video files work too, the audio track is what gets analysed).</p>
           <div class="fc__tabs" role="tablist">
             <button type="button" class="fc__tab is-active" data-tab="file" role="tab" aria-selected="true">Upload file</button>
             <button type="button" class="fc__tab" data-tab="url" role="tab" aria-selected="false">From URL</button>
           </div>
           <div class="fc__pane" data-pane="file">
-            <input type="file" id="fc-creative" accept="audio/*,.mp3,.wav,.m4a,.mp4,.ogg" />
+            <input type="file" id="fc-creative" accept="audio/*,video/*,.mp3,.wav,.m4a,.mp4,.mov,.ogg" />
           </div>
           <div class="fc__pane" data-pane="url" hidden>
             <input type="url" id="fc-creative-url" placeholder="https://cdn.example.com/ad-master.mp3" />
@@ -56,9 +56,10 @@ import Button from '../components/Button.astro';
         <div class="fc__field">
           <label class="fc__label" for="fc-episode">Published episode URL</label>
           <p class="fc__hint">
-            A direct audio link (MP3/M4A) or the podcast's RSS feed (we
+            A direct media link (MP3/M4A/MP4) or the podcast's RSS feed (we
             check its latest episode; for an older episode, paste that
-            episode's direct download link).
+            episode's direct download link). YouTube links are not
+            supported; save the video file and upload it instead.
           </p>
           <input type="url" id="fc-episode" placeholder="https://feeds.example.com/show.mp3" />
         </div>
@@ -323,7 +324,7 @@ import Button from '../components/Button.astro';
     try {
       audio = await ctx.decodeAudioData(buffer);
     } catch {
-      throw new Error(`Could not decode the ${what}. Supported formats: MP3, WAV, M4A/AAC, OGG.`);
+      throw new Error(`Could not decode the ${what}. Supported: MP3, WAV, M4A/AAC, OGG, and MP4/MOV video (audio track).`);
     }
     if (what === 'episode' && audio.duration > MAX_EPISODE_SEC) {
       throw new Error(`That episode is ${Math.round(audio.duration / 60)} minutes long; the free check supports up to 90.`);
