@@ -269,7 +269,32 @@ import Button from '../components/Button.astro';
 
   /* ---- fetching (direct first, then same-origin proxy) ---- */
 
+  /* Platforms the free check cannot read: pages/DRM streams, not media
+     files. Blocked before any fetch so the visitor gets a real
+     explanation instead of a status code. */
+  const UNSUPPORTED_PLATFORMS: [RegExp, string][] = [
+    [/(^|\.)youtube\.com$|(^|\.)youtu\.be$|(^|\.)youtube-nocookie\.com$/,
+     'YouTube links cannot be checked here: the episode page is not a media file. YouTube episodes are covered in paid audits from client-supplied files. For other sources, paste the episode download link (MP3/M4A/MP4) or the podcast RSS feed.'],
+    [/(^|\.)spotify\.com$|(^|\.)open\.spotify\.com$/,
+     'Spotify links cannot be checked here: they point to an app page, not a media file. Paste the episode download link (MP3/M4A/MP4) or the podcast RSS feed instead.'],
+  ];
+
+  function platformBlocked(url: string): string | null {
+    let host: string;
+    try {
+      host = new URL(url).hostname.toLowerCase();
+    } catch {
+      return null;
+    }
+    for (const [re, msg] of UNSUPPORTED_PLATFORMS) {
+      if (re.test(host)) return msg;
+    }
+    return null;
+  }
+
   async function fetchMedia(url: string): Promise<Response> {
+    const blocked = platformBlocked(url);
+    if (blocked) throw new Error(blocked);
     const target = new URL(url);
     if (target.protocol !== 'http:' && target.protocol !== 'https:') {
       throw new Error('Only http(s) URLs are supported.');
@@ -281,7 +306,11 @@ import Button from '../components/Button.astro';
       resp = await fetch(`/proxy?url=${encodeURIComponent(target.href)}`);
     }
     if (!resp.ok) {
-      throw new Error(`The server returned ${resp.status} for that URL. Check that the link points directly to the audio file.`);
+      if (resp.status === 415) {
+        throw new Error(
+          'That link points to a web page, not a media file. Right-click the episode download button and copy the direct link (MP3/M4A/MP4), or paste the podcast RSS feed URL.');
+      }
+      throw new Error(`The server returned ${resp.status} for that URL. Check that the link points directly to the media file.`);
     }
     return resp;
   }
