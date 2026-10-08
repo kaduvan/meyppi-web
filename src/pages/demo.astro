@@ -212,8 +212,8 @@ const fmtTime = (s: number) =>
       </div>
       <p class="demo-head__note">
         This demo runs on data from a real Meyppi engine execution against an
-        illustrative synthetic campaign. In production this page is gated
-        behind authentication and shows your campaign data.
+        illustrative synthetic campaign. In production this page is shared
+        as a private link and shows your campaign data.
       </p>
     </div>
   </section>
@@ -239,7 +239,7 @@ const fmtTime = (s: number) =>
       </div>
 
       <!-- table -->
-      <div class="table-wrap demo-table">
+      <div class="table-wrap demo-table mobile-cards">
         <table>
           <thead>
             <tr>
@@ -258,12 +258,12 @@ const fmtTime = (s: number) =>
                 <tr data-cls={p.cls} data-row={i} class="demo-row" tabindex="0"
                     aria-expanded="false" role="button"
                     aria-label={`Toggle evidence for ${p.id}`}>
-                  <td class="mono">{p.id}</td>
-                  <td>{p.publisher}</td>
-                  <td>{p.expected}</td>
-                  <td>{p.observed}</td>
-                  <td><span class={`chip chip--${p.cls}`}>{p.clsLabel}</span></td>
-                  <td class="mono">{p.conf}</td>
+                  <td class="mono" data-label="Content">{p.id}</td>
+                  <td data-label="Publisher">{p.publisher}</td>
+                  <td data-label="Expected">{p.expected}</td>
+                  <td data-label="Observed">{p.observed}</td>
+                  <td data-label="Verdict"><span class={`chip chip--${p.cls}`}>{p.clsLabel}</span></td>
+                  <td class="mono" data-label="Confidence">{p.conf}</td>
                   <td class="demo-row__chev" aria-hidden="true">▾</td>
                 </tr>
                 <tr class="demo-ev" data-ev={i} hidden>

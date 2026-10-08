@@ -25,9 +25,9 @@ const BG = [248, 248, 248]; // baked-in background of the source PNG
 const dist = (r, g, b) =>
   Math.sqrt((r - BG[0]) ** 2 + (g - BG[1]) ** 2 + (b - BG[2]) ** 2);
 
-// alpha ramp: full transparent at bg, opaque once 60 units away — keeps
-// anti-aliased edges smooth on both white and indigo backgrounds
-const alphaFor = (d) => Math.max(0, Math.min(1, (d - 8) / 52)) * 255;
+// alpha ramp: dead-zone transparent within 24 units of bg (kills the
+// light halo rectangle on dark backgrounds), ramping to opaque by 60
+const alphaFor = (d) => (d < 24 ? 0 : Math.max(0, Math.min(1, (d - 24) / 36)) * 255);
 
 const isNavy = (r, g, b) => r < 120 && g < 130 && b > r && b >= g - 20;
 const isTeal = (r, g, b) => g > 110 && g > r + 60 && b > 80 && r < 110;
@@ -154,10 +154,12 @@ async function main() {
 
   // write web-optimized sizes: nav/footer lockup at 480w (2x of 240),
   // hero mark at 960w (2x of 480)
+  const plain = (buf, width) =>
+    sharp(buf).resize({ width }).png({ compressionLevel: 9 }).toBuffer();
   await sharp(await optimize(fullPng, 480)).toFile(path.join(brandDir, 'logo-full.png'));
-  await sharp(await optimize(revPng, 480)).toFile(path.join(brandDir, 'logo-full-reverse.png'));
+  await sharp(await plain(revPng, 480)).toFile(path.join(brandDir, 'logo-full-reverse.png'));
   await sharp(await optimize(markPng, 960)).toFile(path.join(brandDir, 'logo-mark.png'));
-  await sharp(await optimize(markRevTrim, 960)).toFile(path.join(brandDir, 'logo-mark-reverse.png'));
+  await sharp(await plain(markRevTrim, 960)).toFile(path.join(brandDir, 'logo-mark-reverse.png'));
 
   // favicon 32px — mark on white
   await sharp(markPng)

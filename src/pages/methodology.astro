@@ -36,6 +36,12 @@ import Base from '../layouts/Base.astro';
         <li><strong>Insufficient Signal.</strong> The published media's quality is too low, or the evidence too sparse, for a defensible result either way.</li>
         <li><strong>Manual Review Required.</strong> The evidence is ambiguous between explanations (for example, additive noise versus a cut); an analyst examines it and the report states what was found.</li>
       </ul>
+      <p>
+        Placements whose published media cannot be obtained from any
+        permitted source are reported as <strong>Out of Scope</strong>.
+        That is a scope status, not a verdict: it says the placement could
+        not be observed, never that it did or did not air.
+      </p>
 
       <h2>How a verdict is reached</h2>
       <p>
@@ -105,8 +111,9 @@ import Base from '../layouts/Base.astro';
         independently observable: dynamically inserted placements that vary
         per listener often cannot be verified from a public feed, and
         host-read segments are outside current scope. Video podcasts are
-        matched on their audio track; FM radio audits run as a pilot with
-        clock-aligned recordings and time-band reconciliation. Findings are
+        matched on their audio track; FM radio audits are available as a
+        pilot on request, using clock-aligned recordings and time-band
+        reconciliation. Findings are
         algorithmic evidence, not legal proof.
       </p>
 

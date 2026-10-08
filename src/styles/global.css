@@ -433,6 +433,51 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
+/* mobile: tables with data-label attributes become stacked cards so the
+   classification column is never hidden by horizontal scroll */
+@media (max-width: 720px) {
+  .mobile-cards thead {
+    display: none;
+  }
+  .mobile-cards tr {
+    display: table-row; /* default; card treatment below skips drawers */
+  }
+  .mobile-cards tbody > tr:not(.demo-ev) {
+    display: block;
+    border: 1px solid var(--grey-soft);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    background: var(--white);
+  }
+  .mobile-cards tbody > tr:not(.demo-ev) td {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    border-bottom: 1px dashed var(--grey-soft);
+    padding: 7px 0;
+    text-align: right;
+  }
+  .mobile-cards tbody > tr:not(.demo-ev) td:last-child {
+    border-bottom: none;
+  }
+  .mobile-cards tbody > tr:not(.demo-ev) td::before {
+    content: attr(data-label);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-align: left;
+    flex: none;
+  }
+  .mobile-cards tbody > tr:not(.demo-ev) td[data-label='']::before,
+  .mobile-cards tbody > tr:not(.demo-ev) td:not([data-label])::before {
+    content: '';
+  }
+}
+
 /* ---- timeline ------------------------------------------------------------ */
 
 .timeline {

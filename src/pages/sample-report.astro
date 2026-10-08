@@ -103,9 +103,8 @@ const evidenceEvent = {
         This sample was produced by the real Meyppi pipeline on an
         illustrative synthetic campaign, so every number below is a genuine
         engine output, including the partial detection and the version
-        mismatch. The scenario was run with a fixed clock for
-        reproducibility, which is why event timestamps are round; the
-        confidence values are the classifier's policy constants. Client, campaign and publisher identifiers are redacted.
+        mismatch. The scenario was run with a fixed clock
+        for reproducibility, which is why event timestamps are round. Client, campaign and publisher identifiers are redacted.
         A paid audit delivers this exact format with your campaign's data.
       </p>
 
@@ -139,7 +138,7 @@ const evidenceEvent = {
 
       <!-- Placement table -->
       <h2 style="margin-top:48px">Placement detail</h2>
-      <div class="table-wrap card" style="padding:0">
+      <div class="table-wrap card mobile-cards" style="padding:0">
         <table>
           <thead>
             <tr>
@@ -154,14 +153,14 @@ const evidenceEvent = {
           <tbody>
             {placements.map((p) => (
               <tr>
-                <td class="mono">{p.content}</td>
-                <td>{p.publisher}</td>
-                <td>{p.expected}</td>
-                <td>{p.observed}</td>
-                <td>
+                <td class="mono" data-label="Content">{p.content}</td>
+                <td data-label="Publisher">{p.publisher}</td>
+                <td data-label="Expected">{p.expected}</td>
+                <td data-label="Observed">{p.observed}</td>
+                <td data-label="Classification">
                   <span class={`chip chip--${p.cls}`}>{p.clsLabel}</span>
                 </td>
-                <td>{p.conf}</td>
+                <td data-label="Confidence">{p.conf}</td>
               </tr>
             ))}
           </tbody>
@@ -196,8 +195,9 @@ const evidenceEvent = {
       <!-- Appendix -->
       <h2 style="margin-top:48px">Methodology</h2>
       <p>
-        Master creatives are fingerprinted (Wang-style constellation
-        fingerprinting) and matched against the published media with
+        Master creatives are fingerprinted: each is reduced to a
+        constellation of spectral landmarks, robust to compression and
+        background noise, and matched against the published media with
         temporal alignment. Reference coverage, continuity, gap analysis,
         and alignment consistency determine each classification. When the
         evidence does not support a call, the placement is marked
@@ -213,6 +213,7 @@ const evidenceEvent = {
         <li><strong>Not Detected:</strong> no matching evidence found in the published episode.</li>
         <li><strong>Insufficient Signal:</strong> media quality too low for a defensible result.</li>
         <li><strong>Manual Review Required:</strong> evidence ambiguous; reviewed by an analyst.</li>
+        <li><strong>Out of Scope:</strong> the placement's published media could not be obtained from any permitted source; a scope status, not a verdict.</li>
       </ul>
 
       <p class="note">
